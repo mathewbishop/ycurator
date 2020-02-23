@@ -8,13 +8,21 @@ $(document).ready(function () {
             var articleList = $("#article-list")
             articleList.empty()
             res.forEach(article => {
-                var articleContainer = $("<div>")
-                var title = $("<p>").addClass("title is-5").text(article.title)
-                var articleLink = $("<a>").attr("href", article.url).addClass("column").text("Read Article")
-                var discussionLink = $("<a>").addClass("column").attr("href", `https://news.ycombinator.com/item?id=${article.id}`).text("Read Discusson")
-                var linkContainer = $("<div>").addClass("columns")
+                var articleContainer = $("<div>").addClass("article-block")
+                var title = $("<p>").addClass("article-title").css("margin-bottom", "5px").text(article.title)
 
-                linkContainer.append(articleLink, discussionLink)
+                var linkContainer = $("<div>").addClass("article-link-container")
+
+                var articleBlock = $("<p>")
+                var articleLink = $("<a>").attr("href", article.url).text("Read Article")
+
+                var discussionBlock = $("<p>").css("margin-left", "20px")
+                var discussionLink = $("<a>").attr("href", `https://news.ycombinator.com/item?id=${article.id}`).text("Read Discusson")
+
+                articleBlock.append(articleLink)
+                discussionBlock.append(discussionLink)
+
+                linkContainer.append(articleBlock, discussionBlock)
                 articleContainer.append(title, linkContainer)
 
                 articleList.append(articleContainer)

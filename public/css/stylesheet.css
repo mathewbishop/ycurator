@@ -1,17 +1,29 @@
 :root {
     --color-dark: #263d42;
-    --color-prim: #587b7f;
+    --color-prim: #3e92cc;
     --color-accent: #35ada1;
     --color-alt: #3b6b9b;
+    --color-light: #c2d3cd;
 }
 
 a {
     text-decoration: underline;
     color: var(--color-accent);
 }
+a:hover {
+    color: var(--color-prim);
+}
+
+p, small, h1, .title {
+    color: var(--color-light);
+}
+
+body {
+    background-color: var(--color-dark);
+}
 
 .site-header {
-    background-color: #587b7f;
+    background-color: var(--color-dark);
     padding: 15px;
 }
 
@@ -20,4 +32,16 @@ a {
     background-color: #263d42;
     text-align: right;
     padding: 15px;
+}
+
+.article-block {
+    margin: 25px 0 25px 0;
+}
+
+.article-link-container {
+    display: flex;
+}
+
+.article-title {
+    font-size: 16px;
 }
