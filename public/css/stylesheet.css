@@ -23,25 +23,37 @@ body {
 }
 
 .site-header {
-    background-color: var(--color-dark);
     padding: 15px;
+    border-bottom: 4px solid var(--color-alt);
 }
 
 .site-footer {
+    border-top: 4px solid var(--color-alt);
     margin-top: 15px;
-    background-color: #263d42;
     text-align: right;
     padding: 15px;
 }
 
 .article-block {
-    margin: 25px 0 25px 0;
+    margin: 40px 0 40px 0;
+    border-left: 2px solid var(--color-prim);
+    padding-left: 15px;
+}
+
+.article-title {
+    font-size: 16px;
 }
 
 .article-link-container {
     display: flex;
 }
 
-.article-title {
-    font-size: 16px;
+.article-link {
+    display: block;
 }
+.discussion-link {
+    display: block;
+    margin-left: 20px;
+}
+
+

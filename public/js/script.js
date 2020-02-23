@@ -13,16 +13,10 @@ $(document).ready(function () {
 
                 var linkContainer = $("<div>").addClass("article-link-container")
 
-                var articleBlock = $("<p>")
-                var articleLink = $("<a>").attr("href", article.url).text("Read Article")
+                var articleLink = $("<a>").attr("href", article.url).addClass("article-link").text("Read Article")
+                var discussionLink = $("<a>").attr("href", `https://news.ycombinator.com/item?id=${article.id}`).addClass("discussion-link").text("Read Discusson")
 
-                var discussionBlock = $("<p>").css("margin-left", "20px")
-                var discussionLink = $("<a>").attr("href", `https://news.ycombinator.com/item?id=${article.id}`).text("Read Discusson")
-
-                articleBlock.append(articleLink)
-                discussionBlock.append(discussionLink)
-
-                linkContainer.append(articleBlock, discussionBlock)
+                linkContainer.append(articleLink, discussionLink)
                 articleContainer.append(title, linkContainer)
 
                 articleList.append(articleContainer)
