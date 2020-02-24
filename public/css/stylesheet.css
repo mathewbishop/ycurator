@@ -34,7 +34,16 @@ body {
     text-align: right;
     padding: 15px;
 }
+.by-line-link {
+    color: #c2d3cd;
+}
+.by-line-link:hover {
+    color: var(--color-dark);
+    opacity: .8;
+}
 
+
+/* Article */
 .article-block {
     margin: 40px 0 40px 0;
     border-left: 2px solid var(--color-prim);
@@ -57,10 +66,39 @@ body {
     margin-left: 20px;
 }
 
-.by-line-link {
-    color: #c2d3cd;
+
+/* Loading Indicator */
+.lds-dual-ring {
+    display: none;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
 }
-.by-line-link:hover {
-    color: var(--color-dark);
-    opacity: .8;
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: .6;
 }

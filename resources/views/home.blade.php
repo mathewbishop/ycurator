@@ -16,7 +16,7 @@
 
 @include('header')
 
-<div class="container">
+<div class="container" style="min-height: 60vh;">
 
     <main>
         <section id="article-list">
@@ -27,7 +27,8 @@
 </div>
 
     @include('footer')
-    
+
+    @include('loading')
 </body>
 
 </html>

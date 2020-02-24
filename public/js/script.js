@@ -1,9 +1,12 @@
-$(document).ready(function () {
+function GetCurrentArticles() {
+    $(".lds-dual-ring, .loading-overlay").show()
+
     $.ajax({
-        url: "http://ycurator.test/api/live",
+        url: "http://ycurator.test/api/current-articles",
         type: "GET",
         dataType: "json",
         success: function (res) {
+            $(".lds-dual-ring, .loading-overlay").hide()
             console.log(res)
             var articleList = $("#article-list")
             articleList.empty()
@@ -23,9 +26,15 @@ $(document).ready(function () {
             });
         },
         error: function (error) {
+            $(".lds-dual-ring, .loading-overlay").hide()
             alert("Error occured, check console.")
             console.log(error)
         }
     })
+}
+
+
+$(document).ready(function () {
+    GetCurrentArticles()
 });
 
