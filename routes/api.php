@@ -22,4 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     $articles = $hnc->GetTestData();
 //     return $articles;
 // });
-Route::get('/articles', 'HackerNewsController@GetTestData');
+Route::get('/test', 'HackerNewsController@GetTestData');
+Route::get('/live', 'HackerNewsController@GetArticles');
+

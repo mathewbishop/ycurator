@@ -8,6 +8,21 @@ use Storage;
 
 class HackerNewsController extends Controller
 {
+    public function CurateArticlesByTitle($articleList) 
+    {
+        $curatedArticles = [];
+        $keywords = explode(",", Storage::get('keywords.txt'));
+        foreach ($articleList as $article) {
+            foreach($keywords as $keyword) {
+                if (stripos($article['title'], $keyword) !== false) {
+                    array_push($curatedArticles, $article);
+                }
+            }
+        }
+        return $curatedArticles;
+        // return $keywords;
+    }
+
     public function GetArticles() 
     {
         $client = new Client();
@@ -23,8 +38,10 @@ class HackerNewsController extends Controller
             array_push($top25, $article);
         }
 
+        return $this->CurateArticlesByTitle($top25);        
+
         // return $top25;
-        Storage::put('tempstore.txt', json_encode($top25));
+        // Storage::put('tempstore.txt', json_encode($top25));
     } 
 
     public function GetTestData()
@@ -32,5 +49,6 @@ class HackerNewsController extends Controller
         $data = Storage::get('tempstore.txt');
         return json_decode($data, true);
     }
+
 }
 

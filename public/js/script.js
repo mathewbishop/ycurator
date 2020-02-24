@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $.ajax({
-        url: "http://ycurator.test/api/articles",
+        url: "http://ycurator.test/api/live",
         type: "GET",
         dataType: "json",
         success: function (res) {
