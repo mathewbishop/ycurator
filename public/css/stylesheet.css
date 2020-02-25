@@ -6,6 +6,14 @@
     --color-light: #c2d3cd;
 }
 
+body {
+    background-color: var(--color-dark);
+}
+
+main {
+    min-height: 100vh;
+}
+
 a {
     text-decoration: underline;
     color: var(--color-accent);
@@ -16,10 +24,6 @@ a:hover {
 
 p, small, h1, .title {
     color: var(--color-light);
-}
-
-body {
-    background-color: var(--color-dark);
 }
 
 .site-header {
@@ -64,6 +68,12 @@ body {
 .discussion-link {
     display: block;
     margin-left: 20px;
+}
+
+/* No Results Found */
+#no-results {
+    display: none;
+    margin-top: 20px;
 }
 
 

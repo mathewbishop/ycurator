@@ -8,6 +8,9 @@ function GetCurrentArticles() {
         success: function (res) {
             $(".lds-dual-ring, .loading-overlay").hide()
             console.log(res)
+            if (res.length === 0) {
+                $("#no-results").show()
+            }
             var articleList = $("#article-list")
             articleList.empty()
             res.forEach(article => {
