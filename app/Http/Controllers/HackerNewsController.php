@@ -13,9 +13,13 @@ class HackerNewsController extends Controller
         $curatedArticles = [];
         $keywords = explode(",", Storage::get('keywords.txt'));
         foreach ($articleList as $article) {
-            foreach($keywords as $keyword) {
-                if (stripos($article['title'], $keyword) !== false) {
-                    array_push($curatedArticles, $article);
+            if ($article['descendants'] > 250) {
+                array_push($curatedArticles, $article);
+            } else {
+                foreach($keywords as $keyword) {
+                    if (stripos($article['title'], $keyword) !== false) {
+                        array_push($curatedArticles, $article);
+                    }
                 }
             }
         }
