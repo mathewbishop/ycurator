@@ -13,10 +13,12 @@ class HackerNewsController extends Controller
         $curatedArticles = [];
         $keywords = explode(",", Storage::get('keywords.txt'));
         foreach ($articleList as $article) {
-            if ($article['descendants'] > 250) {
+            $commentCount = urldecode($article['descendants']);
+            if ($commentCount > 250) {
                 array_push($curatedArticles, $article);
             } else {
                 foreach($keywords as $keyword) {
+                    // If the keyword is contained in the article title, add it to list
                     if (stripos($article['title'], $keyword) !== false) {
                         array_push($curatedArticles, $article);
                     }
