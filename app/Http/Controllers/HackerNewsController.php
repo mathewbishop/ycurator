@@ -18,8 +18,10 @@ class HackerNewsController extends Controller
                 array_push($curatedArticles, $article);
             } else {
                 foreach($keywords as $keyword) {
+                    $keywordPadLength = strlen($keyword) + 2;
+                    $paddedKeyword = str_pad($keyword, $keywordPadLength, " ", STR_PAD_BOTH);
                     // If the keyword is contained in the article title, add it to list
-                    if (stripos($article['title'], $keyword) !== false) {
+                    if (stripos($article['title'], $paddedKeyword) !== false) {
                         array_push($curatedArticles, $article);
                     }
                 }

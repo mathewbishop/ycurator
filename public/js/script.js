@@ -15,7 +15,9 @@ function GetCurrentArticles() {
             articleList.empty()
             res.forEach(article => {
                 var articleContainer = $("<div>").addClass("article-block")
-                var title = $("<p>").addClass("article-title").css("margin-bottom", "5px").text(article.title)
+                var title = $("<p>").addClass("article-title").text(article.title)
+
+                var commentCount = $("<small>").addClass("article-comment-count").text("Comment Count: " + article.descendants)
 
                 var linkContainer = $("<div>").addClass("article-link-container")
 
@@ -23,7 +25,7 @@ function GetCurrentArticles() {
                 var discussionLink = $("<a>").attr("href", `https://news.ycombinator.com/item?id=${article.id}`).addClass("discussion-link").text("Read Discusson")
 
                 linkContainer.append(articleLink, discussionLink)
-                articleContainer.append(title, linkContainer)
+                articleContainer.append(title, commentCount, linkContainer)
 
                 articleList.append(articleContainer)
             });
