@@ -5,21 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Storage;
+use Illuminate\Support\Facades\DB;
 
 class HackerNewsController extends Controller
 {
     public function CurateArticlesByTitle($articleList) 
     {
         $curatedArticles = [];
-        $keywords = explode(",", Storage::get('keywords.txt'));
+        $keywords = DB::select('select keyword from keywords');
         foreach ($articleList as $article) {
             $commentCount = urldecode($article['descendants']);
             if ($commentCount > 250) {
                 array_push($curatedArticles, $article);
             } else {
                 foreach($keywords as $keyword) {
-                    $keywordPadLength = strlen($keyword) + 2;
-                    $paddedKeyword = str_pad($keyword, $keywordPadLength, " ", STR_PAD_BOTH);
+                    $keywordPadLength = strlen($keyword->keyword) + 2;
+                    $paddedKeyword = str_pad($keyword->keyword, $keywordPadLength, " ", STR_PAD_BOTH);
                     // If the keyword is contained in the article title, add it to list
                     if (stripos($article['title'], $paddedKeyword) !== false) {
                         array_push($curatedArticles, $article);
