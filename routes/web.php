@@ -13,5 +13,9 @@ use App\Http\Controllers\HackerNewsController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('index');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

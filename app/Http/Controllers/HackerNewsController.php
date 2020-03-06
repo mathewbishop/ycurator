@@ -14,8 +14,7 @@ class HackerNewsController extends Controller
         $curatedArticles = [];
         $keywords = DB::select('select keyword from keywords');
         foreach ($articleList as $article) {
-            $commentCount = urldecode($article['descendants']);
-            if ($commentCount > 250) {
+            if (isset($article['descendants']) && $article['descendants'] > 250) {
                 array_push($curatedArticles, $article);
             } else {
                 foreach($keywords as $keyword) {
