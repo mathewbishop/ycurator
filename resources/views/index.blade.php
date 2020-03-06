@@ -14,19 +14,23 @@
 
 <body>
 
-@include('header')
+    @include('header')
 
-<div class="container">
+    @if (Auth::check())
+    @include('nav')
+    @endif
 
-    <main>
-        <section id="article-list"></section>
-        <div id="no-results">
-            <p style="font-size: 24px;">0 Results.</p>
-            <p><em>No articles were found that meet the curation criteria. Check again later.</em></p>
-        </div>
-    </main>
+    <div class="container">
 
-</div>
+        <main>
+            <section id="article-list"></section>
+            <div id="no-results">
+                <p style="font-size: 24px;">0 Results.</p>
+                <p><em>No articles were found that meet the curation criteria. Check again later.</em></p>
+            </div>
+        </main>
+
+    </div>
 
     @include('footer')
 
