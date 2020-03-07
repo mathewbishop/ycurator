@@ -119,9 +119,9 @@ p, small, h1, .title {
 
 /* No Results Found */
 
-#no-results {
-    display: none;
+.no-results {
     margin-top: 20px;
+    font-size: 18px;
 }
 
 /* Loading Indicator */

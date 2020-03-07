@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 use Storage;
 use Illuminate\Support\Facades\DB;
 
+
 class HackerNewsController extends Controller
 {
     public function CurateArticlesByTitle($articleList) 

@@ -23,6 +23,7 @@
     <div class="container">
 
         <main>
+            @if (!empty($articles))
             @foreach ($articles as $article)
             @if(isset($article['descendants']))
             <div class="article-block">
@@ -39,6 +40,9 @@
             </div>
             @endif
             @endforeach
+            @else
+            <p class="no-results">No articles that meet the curation criteria were found.</p>
+            @endif
         </main>
 
     </div>
