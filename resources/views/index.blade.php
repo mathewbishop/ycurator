@@ -23,17 +23,29 @@
     <div class="container">
 
         <main>
-            <section id="article-list"></section>
+            {{-- <section id="article-list"></section>
             <div id="no-results">
                 <p style="font-size: 24px;">0 Results.</p>
                 <p><em>No articles were found that meet the curation criteria. Check again later.</em></p>
+            </div> --}}
+            @foreach ($articles as $article)
+            @if(isset($article['descendants']))
+            <div class="article-block">
+                <h1 class="article-title">{{ $article['title'] }}</h1>
+                <small class="article-comment-count">Comment Count: {{$article['descendants']}}</small>
+                <div class="article-link-container">
+                    <a href="{{$article['url']}}" class="article-link">Read Article</a>
+                    <a href="https://news.ycombinator.com/item?id={{$article['id']}}" class="discussion-link">Read
+                        Discusson</a>
+                </div>
             </div>
+            @endif
+            @endforeach
         </main>
 
     </div>
 
-    @include('footer')
-
+    @include(' footer')
     @include('loading')
 </body>
 

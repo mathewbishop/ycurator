@@ -18,6 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/test', 'HackerNewsController@GetTestData');
+// Route::get('/test', 'HackerNewsController@GetTestData');
 Route::get('/current-articles', 'HackerNewsController@GetArticles');
 

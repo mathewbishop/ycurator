@@ -46,7 +46,9 @@ class HackerNewsController extends Controller
             array_push($top25, $article);
         }
 
-        return $this->CurateArticlesByTitle($top25);        
+        // return $this->CurateArticlesByTitle($top25);     
+        $articles = $this->CurateArticlesByTitle($top25);   
+        return view('index')->with('articles', $articles);
 
         // return $top25;
         // Storage::put('tempstore.txt', json_encode($top25));
