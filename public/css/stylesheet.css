@@ -55,6 +55,10 @@ p, small, h1, .title {
     font-weight: 700;
 }
 
+.nav-link:hover {
+    color: var(--color-alt);
+}
+
 .nav-active {
     background-color: var(--color-prim);
 }

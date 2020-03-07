@@ -40,6 +40,17 @@ function GetCurrentArticles() {
 
 
 $(document).ready(function () {
-    GetCurrentArticles()
+    var path = window.location.pathname
+    // var url = window.location
+    if (path === '/') {
+        GetCurrentArticles()
+    }
+    console.log(window.location.pathname)
+    $(".main-nav").find(".nav-active").removeClass("nav-active")
+    $(".main-nav .nav-link").each(function () {
+        if ($(this).attr("href") === path) {
+            $(this).addClass("nav-active")
+        }
+    })
 });
 
