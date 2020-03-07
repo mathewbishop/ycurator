@@ -24,17 +24,20 @@
 
         <main>
             @if (!empty($articles))
-            @foreach ($articles as $article)
+            @foreach ($articles as $key => $article)
             @if(isset($article['descendants']))
             <div class="article-block">
-                <h1 class="article-title">{{ $article['title'] }}</h1>
-                <small class="article-comment-count">Comment Count: {{$article['descendants']}}</small>
+                <h1 id="title_{{$key}}" class="article-title">{{ $article['title'] }}</h1>
+                <small id="comment-count_{{$key}}" class="article-comment-count"
+                    data-comment-count="{{$article['descendants']}}">Comment Count:
+                    {{$article['descendants']}}</small>
                 <div class="article-link-container">
-                    <a href="{{$article['url']}}" class="article-link">Read Article</a>
-                    <a href="https://news.ycombinator.com/item?id={{$article['id']}}" class="discussion-link">Read
+                    <a id="article-link_{{$key}}" href="{{$article['url']}}" class="article-link">Read Article</a>
+                    <a id="disc-link_{{$key}}" href="https://news.ycombinator.com/item?id={{$article['id']}}"
+                        class="discussion-link">Read
                         Discusson</a>
                     @if (Auth::check())
-                    <a href="" class="save-link">Save Article</a>
+                    <a id="btn-save-article_{{$key}}" href="#" class="btn-save-article">Save Article</a>
                     @endif
                 </div>
             </div>
