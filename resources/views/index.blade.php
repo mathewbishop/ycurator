@@ -23,11 +23,6 @@
     <div class="container">
 
         <main>
-            {{-- <section id="article-list"></section>
-            <div id="no-results">
-                <p style="font-size: 24px;">0 Results.</p>
-                <p><em>No articles were found that meet the curation criteria. Check again later.</em></p>
-            </div> --}}
             @foreach ($articles as $article)
             @if(isset($article['descendants']))
             <div class="article-block">
