@@ -23,13 +23,7 @@
     <div class="container">
 
         <main>
-            <section id="article-list"></section>
-            @if ('articles')
-            <div id="no-results">
-                <p style="font-size: 24px;">0 Results.</p>
-                <p><em>No saved articles.</em></p>
-            </div>
-            @endif
+
         </main>
 
     </div>

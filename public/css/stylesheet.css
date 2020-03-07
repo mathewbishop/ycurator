@@ -112,6 +112,11 @@ p, small, h1, .title {
     margin-left: 20px;
 }
 
+.save-link {
+    display: block;
+    margin-left: 20px;
+}
+
 /* No Results Found */
 
 #no-results {

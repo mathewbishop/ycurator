@@ -32,6 +32,9 @@
                     <a href="{{$article['url']}}" class="article-link">Read Article</a>
                     <a href="https://news.ycombinator.com/item?id={{$article['id']}}" class="discussion-link">Read
                         Discusson</a>
+                    @if (Auth::check())
+                    <a href="" class="save-link">Save Article</a>
+                    @endif
                 </div>
             </div>
             @endif
