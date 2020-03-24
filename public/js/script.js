@@ -19,7 +19,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "http://ycurator.test/api/save-article",
+            url: "http://ycurator.test/save-article",
             data: articleObj,
             dataType: "application/json",
             success: function (res) {
@@ -34,3 +34,47 @@ $(document).ready(function () {
     })
 });
 
+function GetCurrentArticles() {
+    $(".lds-dual-ring, .loading-overlay").show()
+
+    $.ajax({
+        url: "http://ycurator.test/api/current-articles",
+        type: "GET",
+        dataType: "json",
+        success: function (res) {
+            $(".lds-dual-ring, .loading-overlay").hide()
+            console.log(res)
+            if (res.length === 0) {
+                $("#no-results").show()
+            }
+            var articleList = $("#article-list")
+            articleList.empty()
+            res.forEach((article, index) => {
+                var articleContainer = $("<div>").addClass("article")
+                var title = $("<h1>").attr("id", "title_" + index).addClass("article__title").text(article.title)
+
+                var commentCount = $("<small>").attr("id", "comment-count_" + index).addClass("article__comment-count").text("Comment Count: " + article.descendants)
+
+                var linkContainer = $("<div>").addClass("article__link-container")
+
+                var articleLink = $("<a>").attr("href", article.url).attr("id", "article-link_" + index).addClass("article-link").text("Read Article")
+                var discussionLink = $("<a>").attr("href", `https://news.ycombinator.com/item?id=${article.id}`).attr("id", "disc-link_" + index).addClass("discussion-link").text("Read Discusson")
+
+                linkContainer.append(articleLink, discussionLink)
+                articleContainer.append(title, commentCount, linkContainer)
+
+                articleList.append(articleContainer)
+            });
+        },
+        error: function (error) {
+            $(".lds-dual-ring, .loading-overlay").hide()
+            alert("Error occured, check console.")
+            console.log(error)
+        }
+    })
+}
+
+
+$(document).ready(function () {
+    GetCurrentArticles()
+});

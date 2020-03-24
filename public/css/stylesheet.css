@@ -82,24 +82,24 @@ p, small, h1, .title {
 
 /* Article */
 
-.article-block {
+.article {
     margin: 40px 0 40px 0;
     border-left: 2px solid var(--color-prim);
     padding-left: 15px;
 }
 
-.article-title {
+.article__title {
     font-size: 16px;
     margin-bottom: 0;
 }
 
-.article-comment-count {
+.article__comment-count {
     display: block;
     margin-bottom: 10px;
     font-size: 12px;
 }
 
-.article-link-container {
+.article__link-container {
     display: flex;
 }
 

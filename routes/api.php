@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,5 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // Route::get('/test', 'HackerNewsController@GetTestData');
 // Route::get('/current-articles', 'HackerNewsController@GetArticles');
-Route::post('/save-article', 'SavedArticlesController@SaveArticle');
 

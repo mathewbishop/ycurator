@@ -16,7 +16,7 @@ class SavedArticlesController extends Controller
 
     public function SaveArticle(Request $req)
     {
-        $user_id = Auth::user()->id;
+        $user_id = Auth::id();
         DB::table('saved_articles')->insert(
             ['user_id' => $user_id, 'title' => $req->title, 'comment_count' => $req->commentCount, 'article_url' => $req->articleUrl, 'discussion_url' => $req->discussionUrl]
         );
