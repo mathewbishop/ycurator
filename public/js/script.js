@@ -1,3 +1,8 @@
+function isUserAuthenticated() {
+    return userID !== undefined ? true : false
+}
+
+
 function GetCurrentArticles() {
     $(".lds-dual-ring, .loading-overlay").show()
 
@@ -23,8 +28,12 @@ function GetCurrentArticles() {
 
                 var articleLink = $("<a>").attr("href", article.url).attr("id", "article-link_" + index).addClass("article-link").text("Read Article")
                 var discussionLink = $("<a>").attr("href", `https://news.ycombinator.com/item?id=${article.id}`).attr("id", "disc-link_" + index).addClass("discussion-link").text("Read Discusson")
+                var btnSaveArticle = $("<a>").attr({ "id": "btn-save-article_" + index, "href": "#" }).addClass("btn-save-article").text("Save Article")
 
                 linkContainer.append(articleLink, discussionLink)
+                if (isUserAuthenticated()) {
+                    linkContainer.append(btnSaveArticle)
+                }
                 articleContainer.append(title, commentCount, linkContainer)
 
                 articleList.append(articleContainer)
