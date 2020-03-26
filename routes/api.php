@@ -21,4 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('/current-articles', 'HackerNewsController@GetArticles');
-
+Route::post('/save-article', 'SavedArticlesController@SaveArticle');

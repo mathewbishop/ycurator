@@ -18,11 +18,12 @@ function GetCurrentArticles() {
             }
             var articleList = $("#article-list")
             articleList.empty()
-            res.forEach((article, index) => {
+            res.forEach(function (article, index) {
+                // Create Elements
                 var articleContainer = $("<div>").addClass("article")
                 var title = $("<h1>").attr("id", "title_" + index).addClass("article__title").text(article.title)
 
-                var commentCount = $("<small>").attr("id", "comment-count_" + index).addClass("article__comment-count").text("Comment Count: " + article.descendants)
+                var commentCount = $("<small>").attr("id", "comment-count_" + index).addClass("article__comment-count").data("commentCount", article.descendants).text("Comment Count: " + article.descendants)
 
                 var linkContainer = $("<div>").addClass("article__link-container")
 
@@ -30,6 +31,33 @@ function GetCurrentArticles() {
                 var discussionLink = $("<a>").attr("href", `https://news.ycombinator.com/item?id=${article.id}`).attr("id", "disc-link_" + index).addClass("discussion-link").text("Read Discusson")
                 var btnSaveArticle = $("<a>").attr({ "id": "btn-save-article_" + index, "href": "#" }).addClass("btn-save-article").text("Save Article")
 
+                // Attach Event Listeners
+                btnSaveArticle.on("click", function (e) {
+                    e.preventDefault();
+                    console.log($("#comment-count_" + index).data("commentCount"))
+                    var articleObj = {
+                        userID: userID,
+                        title: $("#title_" + index).text().trim(),
+                        commentCount: $("#comment-count_" + index).data("commentCount"),
+                        articleUrl: $("#article-link_" + index).attr("href"),
+                        discussionUrl: $("#disc-link_" + index).attr("href")
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url: "http://ycurator.test/api/save-article",
+                        data: articleObj,
+                        dataType: "application/json",
+                        success: function (res) {
+                            console.log(res)
+                        },
+                        error: function (err) {
+                            console.log(err)
+                        }
+                    })
+                })
+
+                // Final DOM Attachments
                 linkContainer.append(articleLink, discussionLink)
                 if (isUserAuthenticated()) {
                     linkContainer.append(btnSaveArticle)
@@ -57,32 +85,10 @@ $(document).ready(function () {
         }
     })
 
-    $(".btn-save-article").on("click", function (e) {
-        e.preventDefault();
-        var articleIndex = $(this).attr("id").split("_")[1]
-        var articleObj = {
-            title: $("#title_" + articleIndex).text().trim(),
-            commentCount: $("#comment-count_" + articleIndex).attr("data-comment-count"),
-            articleUrl: $("#article-link_" + articleIndex).attr("href"),
-            discussionUrl: $("#disc-link_" + articleIndex).attr("href")
-        }
-
-        $.ajax({
-            type: "POST",
-            url: "http://ycurator.test/save-article",
-            data: articleObj,
-            dataType: "application/json",
-            success: function (res) {
-                console.log(res)
-            },
-            error: function (err) {
-                alert("An error has occured. Check console.")
-                console.log(err)
-            }
-        })
-    })
-
-    // Get articles on page load
-    GetCurrentArticles();
+    switch (path) {
+        case "/":
+            GetCurrentArticles();
+            break;
+    }
 });
 
