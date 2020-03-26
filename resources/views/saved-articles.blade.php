@@ -13,7 +13,9 @@
 
     <div class="container">
 
-        <main>
+        <p class="no-results">No results found.</p>
+
+        <main id="saved-articles-list">
 
         </main>
 

@@ -20,4 +20,10 @@ class SavedArticlesController extends Controller
             ['user_id' => $req->userID, 'title' => $req->title, 'comment_count' => $req->commentCount, 'article_url' => $req->articleUrl, 'discussion_url' => $req->discussionUrl]
         );
     }
+
+    public function SavedArticlesByUser(Request $req)
+    {
+        $savedArticles = DB::select('select * from saved_articles where user_id = ?', [$req->userID]);
+        return $savedArticles;
+    }
 }

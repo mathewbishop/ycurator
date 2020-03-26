@@ -13,6 +13,8 @@
 
     <div class="container">
 
+        <p class="no-results">No results found.</p>
+
         <main id="article-list">
 
         </main>

@@ -76,6 +76,49 @@ function GetCurrentArticles() {
 }
 
 
+function GetSavedArticles() {
+    $(".lds-dual-ring, .loading-overlay").show()
+
+    $.ajax({
+        url: "http://ycurator.test/api/saved-articles",
+        type: "GET",
+        dataType: "json",
+        data: { userID: userID },
+        success: function (res) {
+            $(".lds-dual-ring, .loading-overlay").hide()
+            console.log(res)
+            if (res.length === 0) {
+                $("#no-results").show()
+            }
+            var articleList = $("#saved-articles-list")
+            articleList.empty()
+            res.forEach(function (article, index) {
+                // Create Elements
+                var articleContainer = $("<div>").addClass("article")
+                var title = $("<h1>").attr("id", "title_" + index).addClass("article__title").text(article.title)
+
+                var commentCount = $("<small>").attr("id", "comment-count_" + index).addClass("article__comment-count").data("commentCount", article.comment_count).text("Comment Count: " + article.comment_count)
+
+                var linkContainer = $("<div>").addClass("article__link-container")
+
+                var articleLink = $("<a>").attr("href", article.article_url).attr("id", "article-link_" + index).addClass("article-link").text("Read Article")
+                var discussionLink = $("<a>").attr("href", article.discussion_url).attr("id", "disc-link_" + index).addClass("discussion-link").text("Read Discusson")
+
+
+                // Final DOM Attachments
+                linkContainer.append(articleLink, discussionLink)
+                articleContainer.append(title, commentCount, linkContainer)
+
+                articleList.append(articleContainer)
+            });
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
+}
+
+
 $(document).ready(function () {
     var path = window.location.pathname
     $(".main-nav").find(".nav-active").removeClass("nav-active")
@@ -88,6 +131,9 @@ $(document).ready(function () {
     switch (path) {
         case "/":
             GetCurrentArticles();
+            break;
+        case "/saved-articles":
+            GetSavedArticles();
             break;
     }
 });
