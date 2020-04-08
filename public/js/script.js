@@ -10,6 +10,7 @@ function GetCurrentArticles() {
         url: "http://ycurator.test/api/current-articles",
         type: "GET",
         dataType: "json",
+        data: { userID: userID },
         success: function (res) {
             $(".lds-dual-ring, .loading-overlay").hide()
             console.log(res)
@@ -113,10 +114,31 @@ function GetSavedArticles() {
             });
         },
         error: function (err) {
+            $(".lds-dual-ring, .loading-overlay").hide()
             console.log(err)
         }
     })
 }
+
+
+// function GetKeywords() {
+//     $(".lds-dual-ring, .loading-overlay").show()
+
+//     $.ajax({
+//         url: "http://ycurator.test/api/criteria",
+//         type: "GET",
+//         dataType: "json",
+//         data: { userID: userID },
+//         success: function (res) {
+//             $(".lds-dual-ring, .loading-overlay").hide()
+//             console.log(res)
+//         },
+//         error: function (err) {
+//             $(".lds-dual-ring, .loading-overlay").hide()
+//             console.log(err)
+//         }
+//     })
+// }
 
 
 $(document).ready(function () {

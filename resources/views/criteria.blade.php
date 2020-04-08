@@ -15,8 +15,10 @@
 
         <p class="no-results">You have not added any keywords.</p>
 
-        <main id="keywords-list">
+        <main>
+            <ul id="keywords-list">
 
+            </ul>
         </main>
 
     </div>

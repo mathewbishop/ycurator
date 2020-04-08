@@ -6,14 +6,15 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 class HackerNewsController extends Controller
 {
-    public function CurateArticlesByTitle($articleList) 
+    public function CurateArticlesByTitle($articleList, $user_id) 
     {
         $curatedArticles = [];
-        $keywords = DB::select('select keyword from keywords');
+        $keywords = DB::select('select keyword from keywords where user_id = ?', [$user_id]);
         foreach ($articleList as $article) {
             if (isset($article['descendants']) && $article['descendants'] > 250) {
                 array_push($curatedArticles, $article);
@@ -32,7 +33,7 @@ class HackerNewsController extends Controller
         // return $keywords;
     }
 
-    public function GetArticles() 
+    public function GetArticles(Request $req) 
     {
         $client = new Client();
         $topStoriesResponse = $client->get('https://hacker-news.firebaseio.com/v0/topstories.json');
@@ -47,7 +48,11 @@ class HackerNewsController extends Controller
             array_push($top25, $article);
         }
 
-        return $this->CurateArticlesByTitle($top25);     
+        if (Auth::check()) {
+            return $this->CurateArticlesByTitle($top25);     
+        } else {
+            return $top25;
+        }
         // $articles = $this->CurateArticlesByTitle($top25);   
         // return view('index')->with('articles', $articles);
 

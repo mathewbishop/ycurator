@@ -167,3 +167,9 @@ p, small, h1, .title {
     background-color: black;
     opacity: .6;
 }
+
+/* Index */
+
+#article-list {
+    padding: 0 15px 0 15px;
+}

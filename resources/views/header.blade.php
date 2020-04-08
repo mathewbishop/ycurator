@@ -2,7 +2,11 @@
     <div>
         <h1 class="site-title is-size-3">Y-Curator</h1>
         <p class="site-subtitle">Curated articles from <a href="https://news.ycombinator.com/news">Hacker News.</a></p>
+        @if (Auth::check())
         <p><em>Articles are curated from the current top 25 stories.</em></p>
+        @else
+        <p><em>Displaying top 25 stories. Login to get curated results.</em></p>
+        @endif
     </div>
     <div>
         @if (Auth::check())
