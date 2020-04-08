@@ -22,10 +22,19 @@
                     <button id="btn-add-keyword" class="keyword-control">Add +</button>
                     <button id="btn-del-keywords" class="keyword-control">Remove -</button>
                 </div>
-                <small><em>Stories that contain these keywords in the title will be curated.</em></small>
                 <ul id="keywords-list">
 
                 </ul>
+                <div>
+                    <button>Cancel</button>
+                    <button>Confirm</button>
+                    <p>Type in a keyword and hit enter (or click the <strong>Add</strong> button below). When you're
+                        done, click the <strong>Confirm</strong> button at the top to add the keywords.</p>
+                    <input type="text" id="keyword-input">
+                    <ul id="temporary-keywords">
+
+                    </ul>
+                </div>
             </section>
         </main>
 
