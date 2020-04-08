@@ -121,24 +121,24 @@ function GetSavedArticles() {
 }
 
 
-// function GetKeywords() {
-//     $(".lds-dual-ring, .loading-overlay").show()
+function GetUserKeywords() {
+    $(".lds-dual-ring, .loading-overlay").show()
 
-//     $.ajax({
-//         url: "http://ycurator.test/api/criteria",
-//         type: "GET",
-//         dataType: "json",
-//         data: { userID: userID },
-//         success: function (res) {
-//             $(".lds-dual-ring, .loading-overlay").hide()
-//             console.log(res)
-//         },
-//         error: function (err) {
-//             $(".lds-dual-ring, .loading-overlay").hide()
-//             console.log(err)
-//         }
-//     })
-// }
+    $.ajax({
+        url: "http://ycurator.test/api/criteria",
+        type: "GET",
+        dataType: "json",
+        data: { userID: userID },
+        success: function (res) {
+            $(".lds-dual-ring, .loading-overlay").hide()
+            console.log(res)
+        },
+        error: function (err) {
+            $(".lds-dual-ring, .loading-overlay").hide()
+            console.log(err)
+        }
+    })
+}
 
 
 $(document).ready(function () {

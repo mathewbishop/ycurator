@@ -48,8 +48,8 @@ class HackerNewsController extends Controller
             array_push($top25, $article);
         }
 
-        if (Auth::check()) {
-            return $this->CurateArticlesByTitle($top25);     
+        if ($req->userID) {
+            return $this->CurateArticlesByTitle($top25, $req->userID);     
         } else {
             return $top25;
         }
