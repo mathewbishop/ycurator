@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HackerNewsController;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +21,7 @@ Auth::routes();
 
 Route::get('/criteria', function () {
     return view('criteria');
-});
+})->middleware("auth");
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/saved-articles', 'SavedArticlesController@savedArticles');

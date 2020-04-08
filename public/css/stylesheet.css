@@ -196,21 +196,23 @@ p, small, h1, .title {
     color: var(--color-alt);
     border-right: 2px solid var(--color-prim);
     padding-right: 15px;
-    display: inline-block;
+    margin-right: 15px;
 }
 
 .keyword-controls {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    margin-bottom: 25px;
 }
 
 .keyword-control {
-    /* border: none;
+    border: none;
     background: none;
     text-decoration: underline;
-    cursor: pointer; */
+    cursor: pointer;
     font-size: 18px;
     color: var(--color-accent);
-    background-color: var(--color-alt);
+    /* background-color: var(--color-alt); */
     margin-right: 5px;
+    margin-left: 5px;
 }

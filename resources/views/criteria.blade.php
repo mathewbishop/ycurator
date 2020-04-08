@@ -17,11 +17,12 @@
 
         <main class="criteria">
             <section class="keywords-section">
-                <h2 class="keywords-section-title">Keywords</h2>
                 <div class="keyword-controls">
-                    <button id="btn-add-keyword" class="button is-small keyword-control">Add Keyword</button>
-                    <button id="btn-del-keywords" class="button is-small keyword-control">Delete Keyword(s)</button>
+                    <h2 class="keywords-section-title">Keywords</h2>
+                    <button id="btn-add-keyword" class="keyword-control">Add +</button>
+                    <button id="btn-del-keywords" class="keyword-control">Remove -</button>
                 </div>
+                <small><em>Stories that contain these keywords in the title will be curated.</em></small>
                 <ul id="keywords-list">
 
                 </ul>
