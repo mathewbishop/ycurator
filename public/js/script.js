@@ -15,7 +15,7 @@ function GetCurrentArticles() {
             $(".lds-dual-ring, .loading-overlay").hide()
             console.log(res)
             if (res.length === 0) {
-                $("#no-results").show()
+                $(".no-results").show()
             }
             var articleList = $("#article-list")
             articleList.empty()
@@ -89,7 +89,7 @@ function GetSavedArticles() {
             $(".lds-dual-ring, .loading-overlay").hide()
             console.log(res)
             if (res.length === 0) {
-                $("#no-results").show()
+                $(".no-results").show()
             }
             var articleList = $("#saved-articles-list")
             articleList.empty()
@@ -131,6 +131,17 @@ function GetUserKeywords() {
         data: { userID: userID },
         success: function (res) {
             $(".lds-dual-ring, .loading-overlay").hide()
+            if (res.length === 0) {
+                $(".no-results").show()
+            }
+
+            var keywordsList = $("#keywords-list")
+            keywordsList.empty()
+
+            res.forEach(function (obj, index) {
+                var keyword = $("<li>").addClass("keyword").text(obj.keyword)
+                keywordsList.append(keyword)
+            })
             console.log(res)
         },
         error: function (err) {

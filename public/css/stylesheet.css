@@ -168,8 +168,49 @@ p, small, h1, .title {
     opacity: .6;
 }
 
-/* Index */
+/* Index Page */
 
 #article-list {
     padding: 0 15px 0 15px;
+}
+
+/* Criteria Page */
+
+#keywords-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.keyword {
+    padding: 10px;
+    margin: 10px;
+    color: var(--color-light);
+}
+
+.keywords-section {
+    margin-top: 20px;
+}
+
+.keywords-section-title {
+    font-size: 22px;
+    color: var(--color-alt);
+    border-right: 2px solid var(--color-prim);
+    padding-right: 15px;
+    display: inline-block;
+}
+
+.keyword-controls {
+    display: inline-flex;
+    align-items: center;
+}
+
+.keyword-control {
+    /* border: none;
+    background: none;
+    text-decoration: underline;
+    cursor: pointer; */
+    font-size: 18px;
+    color: var(--color-accent);
+    background-color: var(--color-alt);
+    margin-right: 5px;
 }

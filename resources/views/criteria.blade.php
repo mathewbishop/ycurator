@@ -15,10 +15,17 @@
 
         <p class="no-results">You have not added any keywords.</p>
 
-        <main>
-            <ul id="keywords-list">
+        <main class="criteria">
+            <section class="keywords-section">
+                <h2 class="keywords-section-title">Keywords</h2>
+                <div class="keyword-controls">
+                    <button id="btn-add-keyword" class="button is-small keyword-control">Add Keyword</button>
+                    <button id="btn-del-keywords" class="button is-small keyword-control">Delete Keyword(s)</button>
+                </div>
+                <ul id="keywords-list">
 
-            </ul>
+                </ul>
+            </section>
         </main>
 
     </div>
