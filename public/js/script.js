@@ -125,7 +125,7 @@ function GetUserKeywords() {
     $(".lds-dual-ring, .loading-overlay").show()
 
     $.ajax({
-        url: "http://ycurator.test/api/criteria",
+        url: "http://ycurator.test/api/user-keywords",
         type: "GET",
         dataType: "json",
         data: { userID: userID },
@@ -156,6 +156,9 @@ $(document).ready(function () {
             break;
         case "/saved-articles":
             GetSavedArticles();
+            break;
+        case "/criteria":
+            GetUserKeywords();
             break;
     }
 });
