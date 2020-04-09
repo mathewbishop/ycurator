@@ -218,19 +218,8 @@ p, small, h1, .title {
     margin-left: 5px;
 }
 
-#add-keyword-interface {
-    display: none;
-    padding: 0 10px 0 10px;
-    margin-top: 20px;
-}
-
 #keyword-input {
     display: block;
-    margin: 10px 0 10px 0;
-}
-
-@media screen and (min-width: 700px) {
-    #keyword-input {
-        max-width: 400px;
-    }
+    margin: 10px 5px 10px 0;
+    max-width: 300px;
 }

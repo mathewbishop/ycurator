@@ -16,7 +16,9 @@ class CurationCriteriaController extends Controller
 
     public function AddKeyword(Request $req)
     {
-        
+        DB::table('keywords')->insert(
+            ['user_id' => $req->userID, 'keyword' => $req->keyword]
+        );
     }
 
     public function DeleteKeyword(Request $req)
