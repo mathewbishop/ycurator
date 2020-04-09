@@ -4,6 +4,7 @@
     --color-accent: #35ada1;
     --color-alt: #3b6b9b;
     --color-light: #c2d3cd;
+    --color-danger: #ae0000;
 }
 
 body {
@@ -215,4 +216,21 @@ p, small, h1, .title {
     /* background-color: var(--color-alt); */
     margin-right: 5px;
     margin-left: 5px;
+}
+
+#add-keyword-interface {
+    display: none;
+    padding: 0 10px 0 10px;
+    margin-top: 20px;
+}
+
+#keyword-input {
+    display: block;
+    margin: 10px 0 10px 0;
+}
+
+@media screen and (min-width: 700px) {
+    #keyword-input {
+        max-width: 400px;
+    }
 }

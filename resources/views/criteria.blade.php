@@ -25,13 +25,17 @@
                 <ul id="keywords-list">
 
                 </ul>
-                <div>
-                    <button>Cancel</button>
-                    <button>Confirm</button>
-                    <p>Type in a keyword and hit enter (or click the <strong>Add</strong> button below). When you're
-                        done, click the <strong>Confirm</strong> button at the top to add the keywords.</p>
-                    <input type="text" id="keyword-input">
-                    <ul id="temporary-keywords">
+                <div id="add-keyword-interface">
+                    <button id="btn-cancel-addkeywords" class="button is-small is-danger">Cancel</button>
+                    <button id="btn-confirm-addkeywords" class="button is-small is-success">Confirm</button>
+                    <p style="margin-top:5px;">Type in a keyword and hit enter (or click the <span
+                            style="font-weight:bold;color:white;">Add
+                            Keyword</span> button below). When you're
+                        done, click the <span style="font-weight:bold;color:white;">Confirm</span> button at the top to
+                        add the keywords.</p>
+                    <input type="text" id="keyword-input" class="input">
+                    <button id="btn-add-keyword" class="button is-small is-success">Add Keyword</button>
+                    <ul id="keywords-to-add">
 
                     </ul>
                 </div>

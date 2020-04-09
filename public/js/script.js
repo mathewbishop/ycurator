@@ -152,6 +152,7 @@ function GetUserKeywords() {
 }
 
 
+
 $(document).ready(function () {
     var path = window.location.pathname
     $(".main-nav").find(".nav-active").removeClass("nav-active")
@@ -172,5 +173,30 @@ $(document).ready(function () {
             GetUserKeywords();
             break;
     }
+
+
+    //===============================================
+    // Criteria Page
+    //===============================================
+    // Array that holds temporary list of keywords that the user is adding. On confirm, this list will be sent to the database to be added there
+    var keywordsToBeAdded = []
+
+    $("#btn-add-keyword").on("click", function (e) {
+        $("#keywords-list").hide(500)
+        $("#add-keyword-interface").show(500)
+    })
+
+    $("#btn-cancel-addkeywords").on("click", function (e) {
+        $("#keywords-list").show(500)
+        $("#add-keyword-interface").hide(500)
+    })
+
+    $("#keyword-input").on("keypress", function (e) {
+        if (e.which === 13 && $(this).val() !== "") {
+            keywordsToBeAdded.push($(this).val())
+            $(this).val("")
+            console.log(keywordsToBeAdded)
+        }
+    })
 });
 
