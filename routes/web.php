@@ -24,6 +24,4 @@ Route::get('/criteria', function () {
 })->middleware("auth");
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/saved-articles', 'SavedArticlesController@savedArticles');
-// Route::get('/', 'HackerNewsController@GetArticles');
-// Route::post('/save-article', 'SavedArticlesController@SaveArticle');
+

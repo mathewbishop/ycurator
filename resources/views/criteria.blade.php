@@ -90,6 +90,8 @@ var selectedKeywords = []
 
 $(document).ready(function () {
 
+    console.log("USER ID", userID)
+
     $("#btn-add-keyword").on("click", function (e) {
         $.ajax({
             url: "http://ycurator.test/api/user-keywords",

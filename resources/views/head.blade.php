@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="{{ asset('/css/stylesheet.css') }}">
     <script src="{{ asset('/js/jquery-3.4.1.min.js') }}"></script>
     <script src="{{ asset('/js/main.js') }}"></script>
-    <script src="{{ asset('/js/criteria.js') }}"></script>
     <title>Y-Curator</title>
     @if(Auth::check())
     <script>

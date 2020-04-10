@@ -30,7 +30,6 @@ class HackerNewsController extends Controller
             }
         }
         return $curatedArticles;
-        // return $keywords;
     }
 
     public function GetArticles(Request $req) 
@@ -53,18 +52,8 @@ class HackerNewsController extends Controller
         } else {
             return $top25;
         }
-        // $articles = $this->CurateArticlesByTitle($top25);   
-        // return view('index')->with('articles', $articles);
 
-        // return $top25;
-        // Storage::put('tempstore.txt', json_encode($top25));
     } 
-
-    public function GetTestData()
-    {
-        $data = Storage::get('tempstore.txt');
-        return json_decode($data, true);
-    }
 
 }
 
