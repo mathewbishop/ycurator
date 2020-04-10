@@ -18,11 +18,11 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
-            <div style="margin-top:10px;">
+            <div style="margin-top:10px;text-align:left;">
                 <label for="email" class="label login-label">{{ __('E-Mail Address') }}</label>
 
                 <div class="col-md-6">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    <input id="email" type="email" class="input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                     @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -32,11 +32,11 @@
                 </div>
             </div>
 
-            <div class="form-group row">
+            <div style="margin-top:10px;text-align:left;">
                 <label for="password" class="label login-label">{{ __('Password') }}</label>
 
                 <div class="col-md-6">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    <input id="password" type="password" class="input @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                     @error('password')
                         <span class="invalid-feedback" role="alert">
