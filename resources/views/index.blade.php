@@ -30,7 +30,7 @@ function GetCurrentArticles() {
     $(".lds-dual-ring, .loading-overlay").show()
 
     $.ajax({
-        url: "https://ycurator.test/api/current-articles",
+        url: `${baseURL}/api/current-articles`,
         method: "GET",
         dataType: "json",
         data: { userID: userID },

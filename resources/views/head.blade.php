@@ -16,4 +16,7 @@
         var userID = undefined;
     </script>
     @endif
+    <script type="text/javascript">
+        var baseURL = {!! json_encode(url('/')) !!}
+    </script>
 </head>
