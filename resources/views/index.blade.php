@@ -26,6 +26,7 @@
 </body>
 
 <script>
+    console.log(baseURL)
 function GetCurrentArticles() {
     $(".lds-dual-ring, .loading-overlay").show()
 
