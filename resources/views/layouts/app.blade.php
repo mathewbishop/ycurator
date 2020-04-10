@@ -14,8 +14,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('/css/bulma.css') }}">
-    <link href="{{ asset('css/stylesheet.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ secure_asset('/css/bulma.css') }}">
+    <link href="{{ secure_asset('css/stylesheet.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
