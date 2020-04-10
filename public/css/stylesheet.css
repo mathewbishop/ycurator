@@ -186,6 +186,12 @@ p, small, h1, .title {
     padding: 10px;
     margin: 10px;
     color: var(--color-light);
+    cursor: pointer;
+}
+
+.keyword__selected {
+    background-color: var(--color-alt);
+    border-radius: 2px;
 }
 
 .keywords-section {

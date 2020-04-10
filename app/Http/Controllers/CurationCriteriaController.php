@@ -23,6 +23,10 @@ class CurationCriteriaController extends Controller
 
     public function DeleteKeyword(Request $req)
     {
-
+        foreach($req->keywordIDList as $keyword_id) {
+            DB::table('keywords')->delete(
+                ['id' => $keyword_id]
+            );
+        }
     }
 }

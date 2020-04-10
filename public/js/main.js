@@ -121,38 +121,6 @@ function GetSavedArticles() {
 }
 
 
-function GetUserKeywords() {
-    $(".lds-dual-ring, .loading-overlay").show()
-
-    $.ajax({
-        url: "http://ycurator.test/api/user-keywords",
-        method: "GET",
-        dataType: "json",
-        data: { userID: userID },
-        success: function (res) {
-            $(".lds-dual-ring, .loading-overlay").hide()
-            if (res.length === 0) {
-                $(".no-results").show()
-            }
-
-            var keywordsList = $("#keywords-list")
-            keywordsList.empty()
-
-            res.forEach(function (obj, index) {
-                var keyword = $("<li>").addClass("keyword").text(obj.keyword)
-                keywordsList.append(keyword)
-            })
-            console.log(res)
-        },
-        error: function (err) {
-            $(".lds-dual-ring, .loading-overlay").hide()
-            console.log(err)
-        }
-    })
-}
-
-
-
 $(document).ready(function () {
     var path = window.location.pathname
     $(".main-nav").find(".nav-active").removeClass("nav-active")
@@ -169,47 +137,6 @@ $(document).ready(function () {
         case "/saved-articles":
             GetSavedArticles();
             break;
-        case "/criteria":
-            GetUserKeywords();
-            break;
     }
-
-
-    //===============================================
-    // Criteria Page
-    //===============================================
-    $("#btn-add-keyword").on("click", function (e) {
-        $.ajax({
-            url: "http://ycurator.test/api/user-keywords",
-            method: "POST",
-            data: { userID: userID, keyword: $("#keyword-input").val() },
-            success: function (res) {
-                console.log(res)
-                location.reload()
-            },
-            error: function (err) {
-                alert("Error occurred when trying to add keyword.")
-                console.log(err)
-            }
-        })
-    })
-
-    $("#keyword-input").on("keypress", function (e) {
-        if (e.which === 13 && $(this).val() !== "") {
-            $.ajax({
-                url: "http://ycurator.test/api/user-keywords",
-                method: "POST",
-                data: { userID: userID, keyword: $("#keyword-input").val() },
-                success: function (res) {
-                    console.log(res)
-                    location.reload()
-                },
-                error: function (err) {
-                    alert("Error occurred when trying to add keyword.")
-                    console.log(err)
-                }
-            })
-        }
-    })
 });
 
