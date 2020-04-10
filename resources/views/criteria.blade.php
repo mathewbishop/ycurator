@@ -44,7 +44,7 @@
     $(".lds-dual-ring, .loading-overlay").show()
 
     $.ajax({
-        url: "http://ycurator.test/api/user-keywords",
+        url: "https://ycurator.test/api/user-keywords",
         method: "GET",
         dataType: "json",
         data: { userID: userID },
@@ -94,7 +94,7 @@ $(document).ready(function () {
 
     $("#btn-add-keyword").on("click", function (e) {
         $.ajax({
-            url: "http://ycurator.test/api/user-keywords",
+            url: "https://ycurator.test/api/user-keywords",
             method: "POST",
             data: { userID: userID, keyword: $("#keyword-input").val() },
             success: function (res) {
@@ -111,7 +111,7 @@ $(document).ready(function () {
     $("#keyword-input").on("keypress", function (e) {
         if (e.which === 13 && $(this).val() !== "") {
             $.ajax({
-                url: "http://ycurator.test/api/user-keywords",
+                url: "https://ycurator.test/api/user-keywords",
                 method: "POST",
                 data: { userID: userID, keyword: $("#keyword-input").val() },
                 success: function (res) {
@@ -128,7 +128,7 @@ $(document).ready(function () {
 
     $("#btn-del-keywords").on("click", function(e) {
         $.ajax({
-            url: "http://ycurator.test/api/user-keywords",
+            url: "https://ycurator.test/api/user-keywords",
             method: "DELETE",
             data: { keywordIDList: selectedKeywords },
             success: function(res) {
