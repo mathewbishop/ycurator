@@ -20,16 +20,14 @@
 <body>
     <div id="app">
         <nav>
-            <div class="has-text-centered" style="padding-top:100px;">
+            <div class="has-text-centered" style="padding-top:100px;margin-bottom:15px;">
                 <a href="{{ url('/') }}">
                     Y-Curator
                 </a>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     
-                    <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -54,7 +52,7 @@
                             </li>
                         @endguest
                     </ul>
-                </div>
+                </div> -->
             </div>
         </nav>
 
