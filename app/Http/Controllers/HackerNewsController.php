@@ -17,7 +17,7 @@ class HackerNewsController extends Controller
         $keywords = DB::select('select keyword from keywords where user_id = ?', [$user_id]);
         $threshold = DB::select('select comment_threshold from user_comment_threshold where user_id = ?', [$user_id]);
         foreach ($articleList as $article) {
-            if (isset($article['descendants']) && $article['descendants'] > $threshold[0]->comment_threshold) {
+            if ($threshold && isset($article['descendants']) && $article['descendants'] > $threshold[0]->comment_threshold) {
                 array_push($curatedArticles, $article);
             } else {
                 foreach($keywords as $keyword) {
@@ -29,7 +29,6 @@ class HackerNewsController extends Controller
             }
         }
         return $curatedArticles;
-        // return $threshold;
     }
 
     public function GetArticles(Request $req) 

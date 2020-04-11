@@ -62,10 +62,10 @@ function GetCurrentArticles() {
                 articleList.append(articleContainer)
             });
         },
-        error: function (error) {
+        error: function (err) {
             $(".lds-dual-ring, .loading-overlay").hide()
-            alert("Error occured, check console.")
-            console.log(error)
+            alert(`An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`)
+            console.log(err)
         }
     })
 }

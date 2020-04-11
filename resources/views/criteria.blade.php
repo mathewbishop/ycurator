@@ -84,6 +84,7 @@
         },
         error: function (err) {
             $(".lds-dual-ring, .loading-overlay").hide()
+            alert(`An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`)
             console.log(err)
         }
     })
@@ -96,26 +97,29 @@ function GetUserThreshold() {
         dataType: "json",
         data: { userID: userID },
         success: function(res) {
-            console.log(res)
-            $("#threshold-input").val(res[0].comment_threshold.toString())
+            console.log("Threshold", res)
+            if (res.length > 0) {
+                $("#threshold-input").val(res[0].comment_threshold.toString())
+            }
         },
         error: function(err) {
+            alert(`An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`)
             console.log(err)
         } 
     })
 }
 
 function SetUserThreshold() {
+    console.log($("#threshold-input").val())
     $.ajax({
         url: `${baseURL}/api/user-threshold`,
         method: "POST",
-        dataType: "json",
         data: { userID: userID, threshold: parseInt($("#threshold-input").val()) },
         success: function(res) {
-            console.log(res)
             location.reload()
         },
         error: function(err) {
+            alert(`An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`)
             console.log(err)
         } 
     })
@@ -153,7 +157,7 @@ $(document).ready(function () {
                     location.reload()
                 },
                 error: function (err) {
-                    alert("Error occurred when trying to add keyword.")
+                    alert(`An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`)
                     console.log(err)
                 }
             })
@@ -170,7 +174,7 @@ $(document).ready(function () {
                 location.reload()
             },
             error: function(err) {
-                alert("Error occurred when trying to delete keyword(s).")
+                alert(`An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`)
                 console.log(err)
             }
         })
@@ -180,7 +184,7 @@ $(document).ready(function () {
         SetUserThreshold()
     })
     
-    $("#threshold-input").on("click", function(e) {
+    $("#threshold-input").on("keypress", function(e) {
         if (e.which === 13) {
             SetUserThreshold()
         }

@@ -36,6 +36,6 @@ class CurationCriteriaController extends Controller
     }
     public function SetCommentThreshold(Request $req)
     {
-        DB::update('update user_comment_threshold set comment_threshold = ? where user_id = ?', [$req->threshold, $req->userID]);
+        DB::insert('insert into user_comment_threshold (user_id, comment_threshold) values (?, ?) on conflict (user_id) do update set comment_threshold = ?', [$req->userID, $req->threshold, $req->threshold]);
     }
 }
