@@ -205,7 +205,7 @@ p, small, h1, .title {
 .keyword-controls {
     display: flex;
     align-items: center;
-    margin-bottom: 25px;
+    margin-bottom: 5px;
 }
 
 .keyword-control {
@@ -226,10 +226,10 @@ p, small, h1, .title {
     max-width: 300px;
 }
 
-.threshold-section {
+.threshold-controls {
     display: flex;
     align-items: center;
-    margin: 75px 0 25px 0;
+    margin: 75px 0 10px 0;
 }
 
 #threshold-input {
