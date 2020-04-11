@@ -194,11 +194,7 @@ p, small, h1, .title {
     border-radius: 2px;
 }
 
-.keywords-section {
-    margin-top: 20px;
-}
-
-.keywords-section-title {
+.criteria__section-title {
     font-size: 22px;
     color: var(--color-alt);
     border-right: 2px solid var(--color-prim);
@@ -230,4 +226,13 @@ p, small, h1, .title {
     max-width: 300px;
 }
 
-/* Login Page */
+.threshold-section {
+    display: flex;
+    align-items: center;
+    margin: 75px 0 25px 0;
+}
+
+#threshold-input {
+    max-width: 80px;
+    margin-right: 5px;
+}

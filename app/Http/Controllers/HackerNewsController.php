@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class HackerNewsController extends Controller
 {
-    public function CurateArticlesByTitle($articleList, $user_id) 
+    private function CurateArticlesByTitle($articleList, $user_id) 
     {
         $curatedArticles = [];
         $keywords = DB::select('select keyword from keywords where user_id = ?', [$user_id]);
@@ -20,10 +20,8 @@ class HackerNewsController extends Controller
                 array_push($curatedArticles, $article);
             } else {
                 foreach($keywords as $keyword) {
-                    $keywordPadLength = strlen($keyword->keyword) + 2;
-                    $paddedKeyword = str_pad($keyword->keyword, $keywordPadLength, " ", STR_PAD_BOTH);
                     // If the keyword is contained in the article title, add it to list
-                    if (stripos($article['title'], $paddedKeyword) !== false) {
+                    if (stripos($article['title'], $keyword->keyword) !== false) {
                         array_push($curatedArticles, $article);
                     }
                 }
@@ -46,7 +44,8 @@ class HackerNewsController extends Controller
             $article = json_decode($articleResponse->getBody(), true);
             array_push($top25, $article);
         }
-
+        
+        // If user is logged in, return articles based on curation criteria. Else, return top 25 from Hacker News
         if ($req->userID) {
             return $this->CurateArticlesByTitle($top25, $req->userID);     
         } else {
