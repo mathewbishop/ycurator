@@ -29,4 +29,13 @@ class CurationCriteriaController extends Controller
             );
         }
     }
+    public function GetCommentThreshold(Request $req)
+    {
+        $threshold = DB::select('select comment_threshold from user_comment_threshold where user_id = ?', [$req->userID]);
+        return $threshold;
+    }
+    public function SetCommentThreshold(Request $req)
+    {
+        DB::update('update user_comment_threshold set comment_threshold = ? where user_id = ?', [$req->threshold, $req->userID]);
+    }
 }

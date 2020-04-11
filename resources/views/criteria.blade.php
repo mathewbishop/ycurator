@@ -32,7 +32,7 @@
             </section>
             <section class="threshold-section">
                 <h2 class="criteria__section-title">Comment Threshold</h2>
-                <input type="text" id="threshold-input" class="input is-small is-rounded">
+                <input type="text" id="threshold-input" name="threshold-input" class="input is-small is-rounded">
                 <button id="btn-set-threshold" class="button is-small is-rounded is-success">Set Threshold</button>
             </section>
         </main>
@@ -89,6 +89,37 @@
     })
 }
 
+function GetUserThreshold() {
+    $.ajax({
+        url: `${baseURL}/api/user-threshold`,
+        method: "GET",
+        dataType: "json",
+        data: { userID: userID },
+        success: function(res) {
+            console.log(res)
+            $("#threshold-input").val(res[0].comment_threshold.toString())
+        },
+        error: function(err) {
+            console.log(err)
+        } 
+    })
+}
+
+function SetUserThreshold() {
+    $.ajax({
+        url: `${baseURL}/api/user-threshold`,
+        method: "POST",
+        dataType: "json",
+        data: { userID: userID, threshold: parseInt($("#threshold-input").val()) },
+        success: function(res) {
+            console.log(res)
+            location.reload()
+        },
+        error: function(err) {
+            console.log(err)
+        } 
+    })
+}
 
 // List of keywords the user has selected (for deleting keywords)
 var selectedKeywords = []
@@ -145,7 +176,18 @@ $(document).ready(function () {
         })
     })
 
+    $("#btn-set-threshold").on("click", function(e) {
+        SetUserThreshold()
+    })
+    
+    $("#threshold-input").on("click", function(e) {
+        if (e.which === 13) {
+            SetUserThreshold()
+        }
+    })
+
     GetUserKeywords()
+    GetUserThreshold()
 })
 </script>
 
