@@ -23,8 +23,9 @@ As of April 2020, there are 2 types of criteria the user can set:
 
 Login with test credentials to see curation features
 
-User: **test@test.com**
-Pass: **testpass**
+Username: **test@test.com**
+
+Password: **testpass**
 
 ## Notes
 
