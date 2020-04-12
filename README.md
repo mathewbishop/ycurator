@@ -1,6 +1,6 @@
 # Y-Curator
 
-Curate or "filter" Hacker News articles you're interested in.
+Curate or "filter" Hacker News articles you're interested in. 
 
 ## Overview
 
@@ -18,6 +18,13 @@ As of April 2020, there are 2 types of criteria the user can set:
 - PostgreSQL
 - PHP (Laravel)
 - jQuery
+
+## Test Credentials
+
+Login with test credentials to see curation features
+
+User: **test@test.com**
+Pass: **testpass**
 
 ## Notes
 

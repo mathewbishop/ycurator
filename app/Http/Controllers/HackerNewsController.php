@@ -23,7 +23,10 @@ class HackerNewsController extends Controller
                 foreach($keywords as $keyword) {
                     // If the keyword is contained in the article title, add it to list
                     if (stripos($article['title'], $keyword->keyword) !== false) {
-                        array_push($curatedArticles, $article);
+                        // Only add an article to the final array once
+                        if (!in_array($article, $curatedArticles)) {
+                            array_push($curatedArticles, $article);
+                        }
                     }
                 }
             }
