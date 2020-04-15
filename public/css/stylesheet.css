@@ -204,6 +204,7 @@ p, small, h1, .title {
 
 .keyword-controls {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     margin-bottom: 5px;
 }
@@ -228,6 +229,7 @@ p, small, h1, .title {
 
 .threshold-controls {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     margin: 75px 0 10px 0;
 }
