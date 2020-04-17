@@ -15,6 +15,8 @@ class CreateKeywordsTable extends Migration
     {
         Schema::create('keywords', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('user_id');
+            $table->text('keyword');
             $table->timestamps();
         });
     }
