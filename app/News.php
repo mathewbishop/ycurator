@@ -6,9 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\UserCriteria;
 
 class News extends Model
 {
+    public function __construct(UserCriteria $UserCriteriaModel)
+    {
+        $this->UserCriteria = $UserCriteriaModel;
+    }
+
     public function GetArticles()
     {
         $client = new Client();
@@ -30,8 +36,8 @@ class News extends Model
     {
         $top25 = $this->GetArticles();
         $curatedArticles = [];
-        $keywords = DB::select('select keyword from keywords where user_id = ?', [$user_id]);
-        $threshold = DB::select('select comment_threshold from user_comment_threshold where user_id = ?', [$user_id]);
+        $keywords = $this->UserCriteria->SelectKeywordsByUser($user_id);
+        $threshold = $this->UserCriteria->SelectCommentThresholdByUser($user_id);
         foreach ($top25 as $article) {
             if ($threshold && isset($article['descendants']) && $article['descendants'] > $threshold[0]->comment_threshold) {
                 array_push($curatedArticles, $article);
