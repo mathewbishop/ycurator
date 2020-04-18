@@ -6,10 +6,15 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\News;
 
 
 class HackerNewsController extends Controller
 {
+    public function __construct(News $NewsModel)
+    {
+        $this->News = $NewsModel;
+    }
     private function CurateArticlesByTitle($articleList, $user_id) 
     {
         $curatedArticles = [];
@@ -50,9 +55,9 @@ class HackerNewsController extends Controller
         
         // If user is logged in, return articles based on curation criteria. Else, return top 25 from Hacker News
         if ($req->userID) {
-            return $this->CurateArticlesByTitle($top25, $req->userID);     
+            return $this->News->GetCuratedArticles($req->userID);
         } else {
-            return $top25;
+            return $this->News->GetArticles();
         }
 
     } 

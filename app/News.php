@@ -26,13 +26,13 @@ class News extends Model
         return $top25;
     }
 
-    public function GetCuratedArticles($userID)
+    public function GetCuratedArticles($user_id)
     {
         $top25 = $this->GetArticles();
         $curatedArticles = [];
         $keywords = DB::select('select keyword from keywords where user_id = ?', [$user_id]);
         $threshold = DB::select('select comment_threshold from user_comment_threshold where user_id = ?', [$user_id]);
-        foreach ($articleList as $article) {
+        foreach ($top25 as $article) {
             if ($threshold && isset($article['descendants']) && $article['descendants'] > $threshold[0]->comment_threshold) {
                 array_push($curatedArticles, $article);
             } else {
