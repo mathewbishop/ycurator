@@ -93,6 +93,22 @@
     })
 }
 
+function AddKeyword() {
+    $.ajax({
+        url: `${baseURL}/api/user-keywords`,
+        method: "POST",
+        data: { userID: userID, keyword: $("#keyword-input").val() },
+        success: function (res) {
+            console.log(res)
+            location.reload()
+        },
+        error: function (err) {
+            alert("Error occurred when trying to add keyword.")
+            console.log(err)
+        }
+    })
+}
+
 function GetUserThreshold() {
     $.ajax({
         url: `${baseURL}/api/user-threshold`,
@@ -132,36 +148,12 @@ var selectedKeywords = []
 $(document).ready(function () {
 
     $("#btn-add-keyword").on("click", function (e) {
-        $.ajax({
-            url: `${baseURL}/api/user-keywords`,
-            method: "POST",
-            data: { userID: userID, keyword: $("#keyword-input").val() },
-            success: function (res) {
-                console.log(res)
-                location.reload()
-            },
-            error: function (err) {
-                alert("Error occurred when trying to add keyword.")
-                console.log(err)
-            }
-        })
+        AddKeyword();
     })
 
     $("#keyword-input").on("keypress", function (e) {
         if (e.which === 13 && $(this).val() !== "") {
-            $.ajax({
-                url: `${baseURL}/api/user-keywords`,
-                method: "POST",
-                data: { userID: userID, keyword: $("#keyword-input").val() },
-                success: function (res) {
-                    console.log(res)
-                    location.reload()
-                },
-                error: function (err) {
-                    alert(`An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`)
-                    console.log(err)
-                }
-            })
+            AddKeyword();
         }
     })
 
