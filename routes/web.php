@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
-Route::get('/', "HackerNewsController@GetArticles");
 
 Auth::routes();
+
+Route::get('/', "HackerNewsController@GetArticles");
 
 Route::get('/criteria', function () {
     return view('criteria');

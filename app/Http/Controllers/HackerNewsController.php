@@ -19,8 +19,8 @@ class HackerNewsController extends Controller
     public function GetArticles(Request $req) 
     {
         // If user is logged in, return articles based on curation criteria. Else, return top 25 from Hacker News
-        if ($req->userID) {
-            $articles = $this->News->GetCuratedArticles($req->userID);
+        if (Auth::check()) {
+            $articles = $this->News->GetCuratedArticles(Auth::id());
             return view('index')->with('articles', $articles);
         } else {
             $articles = $this->News->GetArticles();
