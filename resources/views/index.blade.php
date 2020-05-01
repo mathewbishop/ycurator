@@ -15,13 +15,15 @@
 
         <main id="article-list">
             @if(!empty($articles))
-                @foreach($articles as $key => $article)
+                @foreach($articles as $article)
                 <div class="article">
-                    <h1 id="title_{{$key}}" class="article__title">{{ $article['title'] }}</h1>
-                    <small id="comment-count_{{$key}}" class="article__comment-count">Comment Count: {{$article['descendants']}}</small>
+                    <h1 class="article__title">{{ $article['title'] }}</h1>
+                    <small class="article__comment-count">Comment Count: {{$article['descendants']}}</small>
                     <div class="article__link-container">
-                        <a href="{{$article['url']}}" id="article_link_{{$key}}" class="article-link">Read Article</a>
-                        <a href="https://news.ycombinator.com/item?id={{$article['id']}}" id="disc_link_{{$key}}" class="discussion-link">Read Discussion</a>
+                        @if(isset($article['url']))
+                        <a href="{{ $article['url'] }}" class="article-link">Read Article</a>
+                        @endif
+                        <a href="https://news.ycombinator.com/item?id={{$article['id']}}" class="discussion-link">Read Discussion</a>
                     </div>
                 </div>
                 @endforeach
