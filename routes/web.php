@@ -13,9 +13,8 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+
+Route::get('/', "HackerNewsController@GetArticles");
 
 Auth::routes();
 
@@ -23,5 +22,5 @@ Route::get('/criteria', function () {
     return view('criteria');
 })->middleware("auth");
 
-// Route::get('/home', 'HomeController@index')->name('home');
+
 

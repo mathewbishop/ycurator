@@ -20,9 +20,11 @@ class HackerNewsController extends Controller
     {
         // If user is logged in, return articles based on curation criteria. Else, return top 25 from Hacker News
         if ($req->userID) {
-            return $this->News->GetCuratedArticles($req->userID);
+            $articles = $this->News->GetCuratedArticles($req->userID);
+            return view('index')->with('articles', $articles);
         } else {
-            return $this->News->GetArticles();
+            $articles = $this->News->GetArticles();
+            return view('index')->with('articles', $articles);
         }
 
     } 
