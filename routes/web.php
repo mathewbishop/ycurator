@@ -13,15 +13,15 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+
 
 Auth::routes();
+
+Route::get('/', "HackerNewsController@GetArticles");
 
 Route::get('/criteria', function () {
     return view('criteria');
 })->middleware("auth");
 
-// Route::get('/home', 'HomeController@index')->name('home');
+
 

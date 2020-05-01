@@ -121,7 +121,6 @@ p, small, h1, .title {
 /* No Results Found */
 
 .no-results {
-    display: none;
     margin-top: 20px;
     font-size: 18px;
 }
@@ -177,6 +176,16 @@ p, small, h1, .title {
 
 /* Criteria Page */
 
+.no-keywords {
+    display: none;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.criteria {
+    padding: 0 10px;
+}
+
 #keywords-list {
     display: flex;
     flex-wrap: wrap;
@@ -204,7 +213,6 @@ p, small, h1, .title {
 
 .keyword-controls {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     margin-bottom: 5px;
 }
@@ -216,7 +224,6 @@ p, small, h1, .title {
     cursor: pointer;
     font-size: 18px;
     color: var(--color-accent);
-    /* background-color: var(--color-alt); */
     margin-right: 5px;
     margin-left: 5px;
 }
@@ -229,7 +236,6 @@ p, small, h1, .title {
 
 .threshold-controls {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     margin: 75px 0 10px 0;
 }

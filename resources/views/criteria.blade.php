@@ -13,9 +13,9 @@
 
     <div class="container">
 
-        <p class="no-results">You have not added any keywords.</p>
 
         <main class="criteria">
+        <p class="no-keywords">You have not added any keywords.</p>
             <section style="margin-top:20px;">
                 <div class="keyword-controls">
                     <h2 class="criteria__section-title">Keywords</h2>
@@ -59,8 +59,8 @@
         data: { userID: userID },
         success: function (res) {
             $(".lds-dual-ring, .loading-overlay").hide()
-            if (res.length === 0) {
-                $(".no-results").show()
+            if (!res.length) {
+                $(".no-keywords").show()
             }
 
             var keywordsList = $("#keywords-list")
@@ -84,11 +84,26 @@
                 })
                 keywordsList.append(keyword)
             })
-            console.log(res)
         },
         error: function (err) {
             $(".lds-dual-ring, .loading-overlay").hide()
             alert(`An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`)
+            console.log(err)
+        }
+    })
+}
+
+function AddKeyword() {
+    $.ajax({
+        url: `${baseURL}/api/user-keywords`,
+        method: "POST",
+        data: { userID: userID, keyword: $("#keyword-input").val() },
+        success: function (res) {
+            console.log(res)
+            location.reload()
+        },
+        error: function (err) {
+            alert("Error occurred when trying to add keyword.")
             console.log(err)
         }
     })
@@ -101,7 +116,6 @@ function GetUserThreshold() {
         dataType: "json",
         data: { userID: userID },
         success: function(res) {
-            console.log("Threshold", res)
             if (res.length > 0) {
                 $("#threshold-input").val(res[0].comment_threshold.toString())
             }
@@ -114,7 +128,6 @@ function GetUserThreshold() {
 }
 
 function SetUserThreshold() {
-    console.log($("#threshold-input").val())
     $.ajax({
         url: `${baseURL}/api/user-threshold`,
         method: "POST",
@@ -135,36 +148,12 @@ var selectedKeywords = []
 $(document).ready(function () {
 
     $("#btn-add-keyword").on("click", function (e) {
-        $.ajax({
-            url: `${baseURL}/api/user-keywords`,
-            method: "POST",
-            data: { userID: userID, keyword: $("#keyword-input").val() },
-            success: function (res) {
-                console.log(res)
-                location.reload()
-            },
-            error: function (err) {
-                alert("Error occurred when trying to add keyword.")
-                console.log(err)
-            }
-        })
+        AddKeyword();
     })
 
     $("#keyword-input").on("keypress", function (e) {
         if (e.which === 13 && $(this).val() !== "") {
-            $.ajax({
-                url: `${baseURL}/api/user-keywords`,
-                method: "POST",
-                data: { userID: userID, keyword: $("#keyword-input").val() },
-                success: function (res) {
-                    console.log(res)
-                    location.reload()
-                },
-                error: function (err) {
-                    alert(`An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`)
-                    console.log(err)
-                }
-            })
+            AddKeyword();
         }
     })
 

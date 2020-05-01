@@ -19,9 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-
-Route::get('/current-articles', 'HackerNewsController@GetArticles');
-
 // For user's keywords
 Route::get('/user-keywords', 'CurationCriteriaController@GetKeywordsByUser');
 Route::post('/user-keywords', 'CurationCriteriaController@AddKeyword');
