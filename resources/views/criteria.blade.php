@@ -12,7 +12,8 @@
                 <input type="text" id="keyword-input" class="input is-small is-rounded" placeholder="Type keyword..">
                 <button id="btn-add-keyword" class="button is-small is-success is-rounded">Add Keyword</button>
             </div>
-            <small class="is-block is-italic" style="margin-bottom:20px;">Articles with these keywords in the title will
+            <small class="is-block is-italic keyword-info-message" style="margin-bottom:20px;">Articles with these
+                keywords in the title will
                 be curated.</small>
             <button id="btn-del-keywords" class="button is-small is-rounded is-danger has-text-weight-bold"
                 style="visibility:hidden;margin-bottom:10px;">Delete Selected
@@ -61,10 +62,10 @@
                     keyword.on("click", function (e) {
                         if (!selectedKeywords.includes($(this).data("keyword_id"))) {
                             selectedKeywords.push($(this).data("keyword_id"))
-                            $(this).addClass("keyword__selected")
+                            $(this).addClass("keyword--selected")
                         } else {
                             selectedKeywords.splice(selectedKeywords.indexOf($(this).data("keyword_id")), 1)
-                            $(this).removeClass("keyword__selected")
+                            $(this).removeClass("keyword--selected")
                         }
                         // Display delete btn if keywords are selected
                         selectedKeywords.length ? $("#btn-del-keywords").css("visibility", "visible") : $("#btn-del-keywords").css("visibility", "hidden")
