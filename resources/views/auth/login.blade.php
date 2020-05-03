@@ -5,33 +5,6 @@
 
 <body class="login-page">
 
-    <style>
-        .login-form-container {
-            max-width: 400px;
-            margin: 0 auto;
-            text-align: center;
-            display: flex;
-            align-items: center;
-
-        }
-
-        .login-label {
-            color: #3b6b9b;
-            margin-bottom: 0 !important;
-        }
-
-        .login-form {
-            width: 100%;
-        }
-
-        .login-header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 100px;
-        }
-    </style>
-
     <header class="login-header">
         <p class="is-size-4 has-text-centered login-title">
             <a class="is-size-5" href="/">Y-Curator</a>
@@ -48,12 +21,12 @@
             <div style="margin-top:10px;text-align:left;">
                 <label for="email" class="label login-label">{{ __('E-Mail Address') }}</label>
 
-                <div class="col-md-6">
-                    <input id="email" type="email" class="input @error('email') is-invalid @enderror" name="email"
-                        value="{{ old('email') }}" required autocomplete="email" autofocus>
+                <div>
+                    <input id="email" type="email" class="input auth-input @error('email') is-invalid @enderror"
+                        name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                     @error('email')
-                    <span class="invalid-feedback" role="alert">
+                    <span class="has-text-danger" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
@@ -63,9 +36,10 @@
             <div style="margin-top:10px;text-align:left;">
                 <label for="password" class="label login-label">{{ __('Password') }}</label>
 
-                <div class="col-md-6">
-                    <input id="password" type="password" class="input @error('password') is-invalid @enderror"
-                        name="password" required autocomplete="current-password">
+                <div>
+                    <input id="password" type="password"
+                        class="input auth-input @error('password') is-invalid @enderror" name="password" required
+                        autocomplete="current-password">
 
                     @error('password')
                     <span class="invalid-feedback" role="alert">

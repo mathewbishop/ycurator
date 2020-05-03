@@ -35,8 +35,8 @@
                     <label for="email" class="label login-label has-text-left">{{ __('E-Mail Address') }}</label>
 
                     <div class="col-md-6">
-                        <input id="email" type="email" class="input @error('email') is-invalid @enderror" name="email"
-                            value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        <input id="email" type="email" class="input auth-input @error('email') is-invalid @enderror"
+                            name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                         @error('email')
                         <span class="invalid-feedback" role="alert">

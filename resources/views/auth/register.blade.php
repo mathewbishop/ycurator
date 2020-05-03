@@ -29,8 +29,8 @@
                     <label for="name" class="label login-label has-text-left">{{ __('Name') }}</label>
 
                     <div class="col-md-6">
-                        <input id="name" type="text" class="input @error('name') is-invalid @enderror" name="name"
-                            value="{{ old('name') }}" required autocomplete="name" autofocus>
+                        <input id="name" type="text" class="input auth-input @error('name') is-invalid @enderror"
+                            name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                         @error('name')
                         <span class="invalid-feedback" role="alert">
@@ -44,8 +44,8 @@
                     <label for="email" class="label login-label has-text-left">{{ __('E-Mail Address') }}</label>
 
                     <div class="col-md-6">
-                        <input id="email" type="email" class="input @error('email') is-invalid @enderror" name="email"
-                            value="{{ old('email') }}" required autocomplete="email">
+                        <input id="email" type="email" class="input auth-input @error('email') is-invalid @enderror"
+                            name="email" value="{{ old('email') }}" required autocomplete="email">
 
                         @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -59,8 +59,9 @@
                     <label for="password" class="label login-label has-text-left">{{ __('Password') }}</label>
 
                     <div class="col-md-6">
-                        <input id="password" type="password" class="input @error('password') is-invalid @enderror"
-                            name="password" required autocomplete="new-password">
+                        <input id="password" type="password"
+                            class="input auth-input @error('password') is-invalid @enderror" name="password" required
+                            autocomplete="new-password">
 
                         @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -75,8 +76,8 @@
                         class="label login-label has-text-left">{{ __('Confirm Password') }}</label>
 
                     <div class="col-md-6">
-                        <input id="password-confirm" type="password" class="input" name="password_confirmation" required
-                            autocomplete="new-password">
+                        <input id="password-confirm" type="password" class="input auth-input"
+                            name="password_confirmation" required autocomplete="new-password">
                     </div>
                 </div>
 
