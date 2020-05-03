@@ -1,0 +1,12 @@
+.site-header {
+    padding: 15px;
+    border-bottom: 4px solid var(--color-alt);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.btn-login {
+    background-color: var(--color-accent);
+    text-decoration: none;
+}

@@ -1,83 +1,96 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-@section('content')
-<style>
-    .register-container {
-        max-width: 400px;
-        margin: 0 auto;
-        text-align: center;
-    }
-    .login-label {
-        color: #3b6b9b;
-        margin-bottom: 0 !important;
-    }
-</style>
+@include('head')
 
-<div class="register-container">
-    <p class="is-size-5 has-text-weight-bold">{{ __('Register') }}</p>
+<body>
 
-    <div>
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
+    <style>
+        .register-container {
+            max-width: 400px;
+            margin: 100px auto 0 auto;
+            text-align: center;
+        }
 
-            <div style="margin-top:5px;">
-                <label for="name" class="label login-label has-text-left">{{ __('Name') }}</label>
+        .login-label {
+            color: #3b6b9b;
+            margin-bottom: 0 !important;
+        }
+    </style>
 
-                <div class="col-md-6">
-                    <input id="name" type="text" class="input @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+    <div class="register-container">
+        <p class="is-size-5 has-text-weight-bold">{{ __('Register') }}</p>
 
-                    @error('name')
+        <div>
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
+
+                <div style="margin-top:5px;">
+                    <label for="name" class="label login-label has-text-left">{{ __('Name') }}</label>
+
+                    <div class="col-md-6">
+                        <input id="name" type="text" class="input @error('name') is-invalid @enderror" name="name"
+                            value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                        @error('name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                    @enderror
+                        @enderror
+                    </div>
                 </div>
-            </div>
 
-            <div style="margin-top:5px;">
-                <label for="email" class="label login-label has-text-left">{{ __('E-Mail Address') }}</label>
+                <div style="margin-top:5px;">
+                    <label for="email" class="label login-label has-text-left">{{ __('E-Mail Address') }}</label>
 
-                <div class="col-md-6">
-                    <input id="email" type="email" class="input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                    <div class="col-md-6">
+                        <input id="email" type="email" class="input @error('email') is-invalid @enderror" name="email"
+                            value="{{ old('email') }}" required autocomplete="email">
 
-                    @error('email')
+                        @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                    @enderror
+                        @enderror
+                    </div>
                 </div>
-            </div>
 
-            <div style="margin-top:5px;">
-                <label for="password" class="label login-label has-text-left">{{ __('Password') }}</label>
+                <div style="margin-top:5px;">
+                    <label for="password" class="label login-label has-text-left">{{ __('Password') }}</label>
 
-                <div class="col-md-6">
-                    <input id="password" type="password" class="input @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                    <div class="col-md-6">
+                        <input id="password" type="password" class="input @error('password') is-invalid @enderror"
+                            name="password" required autocomplete="new-password">
 
-                    @error('password')
+                        @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                    @enderror
+                        @enderror
+                    </div>
                 </div>
-            </div>
 
-            <div style="margin-top:5px;">
-                <label for="password-confirm" class="label login-label has-text-left">{{ __('Confirm Password') }}</label>
+                <div style="margin-top:5px;">
+                    <label for="password-confirm"
+                        class="label login-label has-text-left">{{ __('Confirm Password') }}</label>
 
-                <div class="col-md-6">
-                    <input id="password-confirm" type="password" class="input" name="password_confirmation" required autocomplete="new-password">
+                    <div class="col-md-6">
+                        <input id="password-confirm" type="password" class="input" name="password_confirmation" required
+                            autocomplete="new-password">
+                    </div>
                 </div>
-            </div>
 
-            <div style="margin-top:5px;">
-                <div class="col-md-6 offset-md-4">
-                    <button type="submit" class="button is-small is-primary" style="margin-top:10px;">
-                        {{ __('Register') }}
-                    </button>
+                <div style="margin-top:5px;">
+                    <div class="col-md-6 offset-md-4">
+                        <button type="submit" class="button is-small is-primary" style="margin-top:10px;">
+                            {{ __('Register') }}
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
-@endsection
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+:root {
+    --color-dark: #263d42;
+    --color-prim: #3e92cc;
+    --color-accent: #35ada1;
+    --color-alt: #3b6b9b;
+    --color-light: #c2d3cd;
+    --color-danger: #ae0000;
+}
+
+html,
+body {
+    background-color: var(--color-dark);
+}
+
+main {
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: underline;
+    color: var(--color-accent);
+}
+
+a:hover {
+    color: var(--color-prim);
+}
+
+p,
+small,
+h1,
+.title {
+    color: var(--color-light);
+}
+
+.no-results {
+    margin-top: 20px;
+    font-size: 18px;
+}

@@ -1,0 +1,35 @@
+/* Article */
+
+#article-list {
+    padding: 0 15px 0 15px;
+}
+
+.article {
+    margin: 40px 0 40px 0;
+    border-left: 2px solid var(--color-prim);
+    padding-left: 15px;
+}
+
+.article__title {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.article__comment-count {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.article__link-container {
+    display: flex;
+}
+
+.article-link {
+    display: block;
+}
+
+.discussion-link {
+    display: block;
+    margin-left: 20px;
+}
