@@ -1,0 +1,16 @@
+.site-footer {
+    background-color: var(--color-prim);
+    border-top: 4px solid var(--color-alt);
+    margin-top: 15px;
+    text-align: right;
+    padding: 15px;
+}
+
+.by-line-link {
+    color: #c2d3cd;
+}
+
+.by-line-link:hover {
+    color: var(--color-dark);
+    opacity: .8;
+}
