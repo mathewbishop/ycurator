@@ -28,7 +28,8 @@
                 <input type="text" id="threshold-input" name="threshold-input" class="input is-small is-rounded">
                 <button id="btn-set-threshold" class="button is-small is-rounded is-success">Set Threshold</button>
             </div>
-            <small class="is-block is-italic">Articles with a comment count greater than the threshold number will be
+            <small class="is-block is-italic threshold-info-message">Articles with a comment count greater than the
+                threshold number will be
                 curated, irrespective of keyword match.</small>
         </section>
     </section>
