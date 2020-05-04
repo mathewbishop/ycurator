@@ -13,6 +13,8 @@ window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
+require('./criteria-page');
+
 document.addEventListener("DOMContentLoaded", () => {
     const path = window.location.pathname
     const navActive = document.querySelectorAll(".main-nav .nav-active")
