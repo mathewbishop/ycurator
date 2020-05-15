@@ -108,48 +108,46 @@ const selectedKeywords = []
 $(document).ready(function () {
     const path = window.location.pathname
 
-    if (path === "/criteria") {
+    $("#btn-add-keyword").on("click", function (e) {
+        AddKeyword();
+    })
 
-        $("#btn-add-keyword").on("click", function (e) {
+    $("#keyword-input").on("keypress", function (e) {
+        if (e.which === 13 && $(this).val() !== "") {
             AddKeyword();
-        })
+        }
+    })
 
-        $("#keyword-input").on("keypress", function (e) {
-            if (e.which === 13 && $(this).val() !== "") {
-                AddKeyword();
-            }
-        })
+    $("#btn-del-keywords").on("click", function (e) {
+        $.ajax({
+                url: `${baseURL}/api/user-keywords`,
+                method: "DELETE",
+                data: {
+                    keywordIDList: selectedKeywords
+                }
+            })
+            .then(res => {
+                console.log(res)
+                location.reload()
+            })
+            .catch(err => {
+                alert(`An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`)
+                console.log(err)
+            })
+    })
 
-        $("#btn-del-keywords").on("click", function (e) {
-            $.ajax({
-                    url: `${baseURL}/api/user-keywords`,
-                    method: "DELETE",
-                    data: {
-                        keywordIDList: selectedKeywords
-                    }
-                })
-                .then(res => {
-                    console.log(res)
-                    location.reload()
-                })
-                .catch(err => {
-                    alert(`An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`)
-                    console.log(err)
-                })
-        })
+    $("#btn-set-threshold").on("click", function (e) {
+        SetUserThreshold()
+    })
 
-        $("#btn-set-threshold").on("click", function (e) {
+    $("#threshold-input").on("keypress", function (e) {
+        if (e.which === 13) {
             SetUserThreshold()
-        })
-
-        $("#threshold-input").on("keypress", function (e) {
-            if (e.which === 13) {
-                SetUserThreshold()
-            }
-        })
+        }
+    })
 
 
-        GetUserKeywords()
-        GetUserThreshold()
-    }
+    GetUserKeywords()
+    GetUserThreshold()
+
 })
