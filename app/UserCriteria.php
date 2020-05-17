@@ -11,7 +11,7 @@ class UserCriteria extends Model
     // Keyword Methods
     public function SelectKeywordsByUser($user_id)
     {
-        return DB::table('user_keywords')->where('user_id', '=', $user_id)->get();
+        return DB::table('user_keywords')->where('user_id', '=', $user_id)->orderBy('id', 'asc')->get();
     }
 
     public function InsertOneKeyword($user_id, $keyword)
