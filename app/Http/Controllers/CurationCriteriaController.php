@@ -21,7 +21,8 @@ class CurationCriteriaController extends Controller
 
     public function AddKeyword(Request $req)
     {
-        $this->UserCriteria->InsertOneKeyword($req->userID, $req->keyword);
+        $keyword_id = $this->UserCriteria->InsertOneKeyword($req->userID, $req->keyword);
+        return $this->UserCriteria->SelectOneKeywordById($keyword_id);
     }
 
     public function DeleteKeyword(Request $req)

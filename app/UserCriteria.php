@@ -11,13 +11,12 @@ class UserCriteria extends Model
     // Keyword Methods
     public function SelectKeywordsByUser($user_id)
     {
-        $user_keywords = DB::table('user_keywords')->where('user_id', '=', $user_id)->get();
-        return $user_keywords;
+        return DB::table('user_keywords')->where('user_id', '=', $user_id)->get();
     }
 
     public function InsertOneKeyword($user_id, $keyword)
     {
-        DB::table('user_keywords')->insert(['user_id' => $user_id, 'keyword' => $keyword]);
+        return DB::table('user_keywords')->insertGetId(['user_id' => $user_id, 'keyword' => $keyword]);
     }
 
     public function DeleteKeywordsById($keyword_id_list)
@@ -25,6 +24,11 @@ class UserCriteria extends Model
         foreach ($keyword_id_list as $keyword_id) {
             DB::table('user_keywords')->where('id', '=', $keyword_id)->delete();
         }
+    }
+
+    public function SelectOneKeywordById($id)
+    {
+        return DB::table('user_keywords')->where('id', '=', $id)->get();
     }
 
     // Comment Threshold Methods
