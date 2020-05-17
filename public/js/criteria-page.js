@@ -1,48 +1,64 @@
-function GetUserKeywords() {
-    $(".lds-dual-ring, .loading-overlay").show()
+const GetUserKeywords = async () => {
+    const $loadingIndicatorNodeList = document.querySelectorAll(".lds-dual-ring, .loading-overlay");
+    for (let node of $loadingIndicatorNodeList) {
+        node.style.display = "block"
+    }
 
-    $.ajax({
-            url: `${baseURL}/api/user-keywords`,
-            method: "GET",
-            dataType: "json",
-            data: {
+    try {
+        const {
+            data: keywords
+        } = await axios.get(`${baseURL}/api/user-keywords`, {
+            params: {
                 userID: userID
             }
-        })
-        .then(res => {
-            $(".lds-dual-ring, .loading-overlay").hide()
-            if (!res.length) {
-                $(".no-keywords").show()
-            }
+        });
+        for (let node of $loadingIndicatorNodeList) {
+            node.style.display = "none";
+        }
+        if (!keywords.length) {
+            document.querySelector(".no-keywords").style.display = "block";
+        }
 
-            const keywordsList = $("#keywords-list")
-            keywordsList.empty()
+        const $keywordsList = document.getElementById("keywords-list");
+        while ($keywordsList.firstChild) {
+            $keywordsList.removeChild($keywordsList.lastChild);
+        }
 
-            res.forEach((obj, index) => {
-                const keyword = $("<li>").addClass("keyword").attr("id", "keyword_" + obj.id).data("keyword_id", obj.id).text(obj.keyword)
+        keywords.forEach(obj => {
+            const keyword = document.createElement("li");
+            keyword.classList.add("keyword")
+            keyword.id = "keyword_" + obj.id;
+            keyword.innerText = obj.keyword;
 
-                keyword.on("click", function (e) {
-                    if (!selectedKeywords.includes($(this).data("keyword_id"))) {
-                        selectedKeywords.push($(this).data("keyword_id"))
-                        $(this).addClass("keyword--selected")
-                    } else {
-                        selectedKeywords.splice(selectedKeywords.indexOf($(this).data("keyword_id")), 1)
-                        $(this).removeClass("keyword--selected")
-                    }
-                    // Display delete btn if keywords are selected
-                    selectedKeywords.length ? $("#btn-del-keywords").css("visibility", "visible") : $("#btn-del-keywords").css("visibility", "hidden")
-                    // Update the selected count to display in the delete button's text
-                    $("#selected-count").text(selectedKeywords.length)
-                })
-                keywordsList.append(keyword)
+            keyword.addEventListener("click", function (e) {
+                let id = this.id.split("_")[1];
+                if (!selectedKeywords.includes(id)) {
+                    selectedKeywords.push(id);
+                    this.classList.add("keyword--selected");
+                } else {
+                    selectedKeywords.splice(selectedKeywords.indexOf(id), 1);
+                    this.classList.remove("keyword--selected");
+                }
             })
-        })
-        .catch(err => {
-            $(".lds-dual-ring, .loading-overlay").hide()
-            alert(`An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`)
-            console.log(err)
+
+            // Display delete btn if keywords are selected
+            let btnDelKeywords = document.getElementById("btn-del-keywords");
+            selectedKeywords.length > 0 ? btnDelKeywords.style.visibility = "visible" : btnDelKeywords.style.visibility = "hidden";
+            // Update the selected count to display in the delete button's text
+            document.getElementById("selected-count").innerText = selectedKeywords.length;
+
+            $keywordsList.append(keyword);
         })
 
+    } catch (err) {
+        for (let node of $loadingIndicatorNodeList) {
+            node.style.display = "none";
+        }
+        alert(
+            `An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`
+        );
+        console.log(err);
+    }
 }
 
 function AddKeyword() {
@@ -55,13 +71,13 @@ function AddKeyword() {
             }
         })
         .then(res => {
-            console.log(res)
-            location.reload()
+            console.log(res);
+            location.reload();
         })
         .catch(err => {
-            alert("Error occurred when trying to add keyword.")
-            console.log(err)
-        })
+            alert("Error occurred when trying to add keyword.");
+            console.log(err);
+        });
 }
 
 function GetUserThreshold() {
@@ -75,13 +91,15 @@ function GetUserThreshold() {
         })
         .then(res => {
             if (res.length > 0) {
-                $("#threshold-input").val(res[0].comment_threshold.toString())
+                $("#threshold-input").val(res[0].comment_threshold.toString());
             }
         })
         .catch(err => {
-            alert(`An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`)
-            console.log(err)
-        })
+            alert(
+                `An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`
+            );
+            console.log(err);
+        });
 }
 
 function SetUserThreshold() {
@@ -94,29 +112,31 @@ function SetUserThreshold() {
             }
         })
         .then(res => {
-            location.reload()
+            location.reload();
         })
         .catch(err => {
-            alert(`An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`)
-            console.log(err)
-        })
+            alert(
+                `An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`
+            );
+            console.log(err);
+        });
 }
 
 // List of keywords the user has selected (for deleting keywords)
-const selectedKeywords = []
+const selectedKeywords = [];
 
 $(document).ready(function () {
-    const path = window.location.pathname
+    const path = window.location.pathname;
 
     $("#btn-add-keyword").on("click", function (e) {
         AddKeyword();
-    })
+    });
 
     $("#keyword-input").on("keypress", function (e) {
         if (e.which === 13 && $(this).val() !== "") {
             AddKeyword();
         }
-    })
+    });
 
     $("#btn-del-keywords").on("click", function (e) {
         $.ajax({
@@ -127,27 +147,27 @@ $(document).ready(function () {
                 }
             })
             .then(res => {
-                console.log(res)
-                location.reload()
+                console.log(res);
+                location.reload();
             })
             .catch(err => {
-                alert(`An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`)
-                console.log(err)
-            })
-    })
+                alert(
+                    `An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`
+                );
+                console.log(err);
+            });
+    });
 
     $("#btn-set-threshold").on("click", function (e) {
-        SetUserThreshold()
-    })
+        SetUserThreshold();
+    });
 
     $("#threshold-input").on("keypress", function (e) {
         if (e.which === 13) {
-            SetUserThreshold()
+            SetUserThreshold();
         }
-    })
+    });
 
-
-    GetUserKeywords()
-    GetUserThreshold()
-
-})
+    GetUserKeywords();
+    GetUserThreshold();
+});
