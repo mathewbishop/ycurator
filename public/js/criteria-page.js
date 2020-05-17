@@ -1,3 +1,9 @@
+(function () {
+
+}())
+// List of keywords the user has selected (for deleting keywords)
+const selectedKeywords = [];
+
 const GetUserKeywords = async () => {
     const $loadingIndicatorNodeList = document.querySelectorAll(".lds-dual-ring, .loading-overlay");
     for (let node of $loadingIndicatorNodeList) {
@@ -6,7 +12,7 @@ const GetUserKeywords = async () => {
 
     try {
         const {
-            data: keywords
+            data: res
         } = await axios.get(`${baseURL}/api/user-keywords`, {
             params: {
                 userID: userID
@@ -15,7 +21,7 @@ const GetUserKeywords = async () => {
         for (let node of $loadingIndicatorNodeList) {
             node.style.display = "none";
         }
-        if (!keywords.length) {
+        if (!res.length) {
             document.querySelector(".no-keywords").style.display = "block";
         }
 
@@ -24,12 +30,12 @@ const GetUserKeywords = async () => {
             $keywordsList.removeChild($keywordsList.lastChild);
         }
 
-        keywords.forEach(obj => {
-            const keyword = document.createElement("li");
-            keyword.classList.add("keyword");
-            keyword.id = "keyword_" + obj.id;
-            keyword.innerText = obj.keyword;
-            $keywordsList.append(keyword);
+        res.forEach(obj => {
+            const $keyword = document.createElement("li");
+            $keyword.classList.add("keyword");
+            $keyword.id = "keyword_" + obj.id;
+            $keyword.innerText = obj.keyword;
+            $keywordsList.append($keyword);
         })
 
     } catch (err) {
@@ -44,23 +50,23 @@ const GetUserKeywords = async () => {
 }
 
 const AddKeyword = async () => {
-    let keywordInput = document.getElementById("keyword-input");
+    let $keywordInput = document.getElementById("keyword-input");
 
     try {
         const {
             data: response
         } = await axios.post(`${baseURL}/api/user-keywords`, {
             userID: userID,
-            keyword: keywordInput.value
+            keyword: $keywordInput.value
         })
-        console.log(response)
+
         const $keywordsList = document.getElementById("keywords-list");
-        const keyword = document.createElement("li");
-        keyword.classList.add("keyword");
-        keyword.id = "keyword_" + response[0].id;
-        keyword.innerText = response[0].keyword;
-        $keywordsList.append(keyword);
-        keywordInput.value = "";
+        const $keyword = document.createElement("li");
+        $keyword.classList.add("keyword");
+        $keyword.id = "keyword_" + response[0].id;
+        $keyword.innerText = response[0].keyword;
+        $keywordsList.append($keyword);
+        $keywordInput.value = "";
     } catch (err) {
         alert(
             `An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`
@@ -69,113 +75,99 @@ const AddKeyword = async () => {
     }
 }
 
-function GetUserThreshold() {
-    $.ajax({
-            url: `${baseURL}/api/user-threshold`,
-            method: "GET",
-            dataType: "json",
+const DeleteKeywords = async () => {
+    try {
+        const {
+            data: res
+        } = await axios.delete(`${baseURL}/api/user-keywords`, {
             data: {
+                keywordIDList: selectedKeywords
+            }
+        })
+        console.log(res)
+        location.reload();
+    } catch (err) {
+        alert(
+            `An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`
+        );
+        console.log(err);
+    }
+}
+
+const GetUserThreshold = async () => {
+    const $thresholdInput = document.getElementById("threshold-input");
+
+    try {
+        const {
+            data: res
+        } = await axios.get(`${baseURL}/api/user-threshold`, {
+            params: {
                 userID: userID
             }
         })
-        .then(res => {
-            if (res.length > 0) {
-                $("#threshold-input").val(res[0].comment_threshold.toString());
-            }
-        })
-        .catch(err => {
-            alert(
-                `An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`
-            );
-            console.log(err);
-        });
+        if (res.length > 0) {
+            $thresholdInput.value = res[0].comment_threshold.toString();
+        }
+    } catch (err) {
+        alert(
+            `An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`
+        );
+        console.log(err);
+    }
 }
 
-function SetUserThreshold() {
-    $.ajax({
-            url: `${baseURL}/api/user-threshold`,
-            method: "POST",
-            data: {
-                userID: userID,
-                threshold: parseInt($("#threshold-input").val())
-            }
+const SetUserThreshold = async () => {
+    const $thresholdInput = document.getElementById("threshold-input");
+    try {
+        const {
+            data: res
+        } = await axios.post(`${baseURL}/api/user-threshold`, {
+            userID: userID,
+            threshold: parseInt($thresholdInput.value)
         })
-        .then(res => {
-            location.reload();
-        })
-        .catch(err => {
-            alert(
-                `An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`
-            );
-            console.log(err);
-        });
+        $thresholdInput.value = parseInt(res[0].comment_threshold);
+    } catch (err) {
+        alert(
+            `An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`
+        );
+        console.log(err);
+    }
 }
 
-// List of keywords the user has selected (for deleting keywords)
-const selectedKeywords = [];
 
-$(document).ready(function () {
-
-    $("#btn-add-keyword").on("click", function (e) {
-        AddKeyword();
-    });
-
-    $("#keyword-input").on("keypress", function (e) {
-        if (e.which === 13 && $(this).val() !== "") {
-            AddKeyword();
+document.addEventListener("keydown", e => {
+    let target = e.target;
+    if (e.key === "Enter") {
+        if (target.id === "keyword-input") {
+            if (target.value !== "") AddKeyword();
         }
-    });
+        if (target.id === "threshold-input") SetUserThreshold();
+    }
+})
 
-    $("#btn-del-keywords").on("click", function (e) {
-        $.ajax({
-                url: `${baseURL}/api/user-keywords`,
-                method: "DELETE",
-                data: {
-                    keywordIDList: selectedKeywords
-                }
-            })
-            .then(res => {
-                console.log(res);
-                location.reload();
-            })
-            .catch(err => {
-                alert(
-                    `An error occurred. HTTP status: ${err.status}. Error reads: ${err.statusText}`
-                );
-                console.log(err);
-            });
-    });
+document.addEventListener("click", function (e) {
+    let target = e.target;
+    if (target.id === "btn-add-keyword") AddKeyword();
+    if (target.id === "btn-set-threshold") SetUserThreshold();
+    if (target.id === "btn-del-keywords") DeleteKeywords();
 
-    $("#btn-set-threshold").on("click", function (e) {
-        SetUserThreshold();
-    });
-
-    $("#threshold-input").on("keypress", function (e) {
-        if (e.which === 13) {
-            SetUserThreshold();
+    if (target.classList.contains("keyword")) {
+        let id = target.id.split("_")[1];
+        if (!selectedKeywords.includes(id)) {
+            selectedKeywords.push(id);
+            target.classList.add("keyword--selected");
+        } else {
+            selectedKeywords.splice(selectedKeywords.indexOf(id), 1);
+            target.classList.remove("keyword--selected");
         }
-    });
+        // Display delete btn if keywords are selected
+        let btnDelKeywords = document.getElementById("btn-del-keywords");
+        let selectedCount = document.getElementById("selected-count");
+        selectedKeywords.length > 0 ? btnDelKeywords.style.visibility = "visible" : btnDelKeywords.style.visibility = "hidden";
+        // Update the selected count to display in the delete button's text
+        selectedCount.innerText = selectedKeywords.length;
+    }
+})
 
-    document.addEventListener("click", function (e) {
-        let target = e.target;
-        if (target.classList.contains("keyword")) {
-            let id = target.id.split("_")[1];
-            if (!selectedKeywords.includes(id)) {
-                selectedKeywords.push(id);
-                target.classList.add("keyword--selected");
-            } else {
-                selectedKeywords.splice(selectedKeywords.indexOf(id), 1);
-                target.classList.remove("keyword--selected");
-            }
-            // Display delete btn if keywords are selected
-            let btnDelKeywords = document.getElementById("btn-del-keywords");
-            let selectedCount = document.getElementById("selected-count");
-            selectedKeywords.length > 0 ? btnDelKeywords.style.visibility = "visible" : btnDelKeywords.style.visibility = "hidden";
-            // Update the selected count to display in the delete button's text
-            selectedCount.innerText = selectedKeywords.length;
-        }
-    })
-
-    GetUserKeywords();
-    GetUserThreshold();
-});
+GetUserKeywords();
+GetUserThreshold();

@@ -37,5 +37,6 @@ class CurationCriteriaController extends Controller
     public function SetCommentThreshold(Request $req)
     {
         $this->UserCriteria->UpsertCommentThresholdByUser($req->userID, $req->threshold);
+        return $this->UserCriteria->SelectCommentThresholdByUser($req->userID);
     }
 }
