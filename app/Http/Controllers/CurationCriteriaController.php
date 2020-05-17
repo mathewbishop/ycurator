@@ -21,7 +21,8 @@ class CurationCriteriaController extends Controller
 
     public function AddKeyword(Request $req)
     {
-        $this->UserCriteria->InsertOneKeyword($req->userID, $req->keyword);
+        $keyword_id = $this->UserCriteria->InsertOneKeyword($req->userID, $req->keyword);
+        return $this->UserCriteria->SelectOneKeywordById($keyword_id);
     }
 
     public function DeleteKeyword(Request $req)
@@ -36,5 +37,6 @@ class CurationCriteriaController extends Controller
     public function SetCommentThreshold(Request $req)
     {
         $this->UserCriteria->UpsertCommentThresholdByUser($req->userID, $req->threshold);
+        return $this->UserCriteria->SelectCommentThresholdByUser($req->userID);
     }
 }
