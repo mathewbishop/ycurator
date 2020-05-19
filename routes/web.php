@@ -23,5 +23,12 @@ Route::get('/criteria', function () {
     return view('criteria');
 })->middleware("auth");
 
+// For user's keywords
+Route::get('/criteria/keywords', 'CurationCriteriaController@GetKeywordsByUser')->middleware("auth");
+Route::post('/criteria/keywords', 'CurationCriteriaController@AddKeyword')->middleware("auth");
+Route::delete('/criteria/keywords', 'CurationCriteriaController@DeleteKeyword')->middleware("auth");
 
+// For user comment threshold
+Route::get('/criteria/threshold', 'CurationCriteriaController@GetCommentThreshold')->middleware("auth");
+Route::post('/criteria/threshold', 'CurationCriteriaController@SetCommentThreshold')->middleware("auth");
 

@@ -10,7 +10,7 @@
         try {
             const {
                 data: res
-            } = await axios.get(`${baseURL}/api/user-keywords`, {
+            } = await axios.get(`${baseURL}/criteria/keywords`, {
                 params: {
                     userID: userID
                 }
@@ -52,7 +52,7 @@
         try {
             const {
                 data: response
-            } = await axios.post(`${baseURL}/api/user-keywords`, {
+            } = await axios.post(`${baseURL}/criteria/keywords`, {
                 userID: userID,
                 keyword: $keywordInput.value
             })
@@ -78,7 +78,7 @@
         try {
             const {
                 data: res
-            } = await axios.delete(`${baseURL}/api/user-keywords`, {
+            } = await axios.delete(`${baseURL}/criteria/keywords`, {
                 data: {
                     keywordIDList: selectedKeywords
                 }
@@ -103,7 +103,7 @@
         try {
             const {
                 data: res
-            } = await axios.get(`${baseURL}/api/user-threshold`, {
+            } = await axios.get(`${baseURL}/criteria/threshold`, {
                 params: {
                     userID: userID
                 }
@@ -124,7 +124,7 @@
         try {
             const {
                 data: res
-            } = await axios.post(`${baseURL}/api/user-threshold`, {
+            } = await axios.post(`${baseURL}/criteria/threshold`, {
                 userID: userID,
                 threshold: parseInt($thresholdInput.value)
             })
